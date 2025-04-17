@@ -1,17 +1,39 @@
-# FilMood - Angular
+# 🎬 Filmood
+![Filmood Logo](public/images/logo.jpg)
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 19.1.8.
+Filmood es una aplicación web desarrollada con **Angular** que permite a los usuarios explorar películas utilizando la API de [TMDb](https://www.themoviedb.org/). Diseñada para los amantes del cine, ofrece una visual atractiva e intuitiva para descubrir, buscar y guardar películas favoritas.
 
-## Development server
 
-To start a local development server, run:
+## 🚀 Funcionalidades a desarrollar
+
+- [-] Explora películas populares, top rated y en cartelera.
+- [-] Búsqueda de películas por nombre.
+- [-] Detalles de cada película: título, sinopsis, fecha de estreno, puntuación y más.
+- [-] Interfaz moderna y responsive desarrollada con **Angular 19** y **Tailwind CSS 4**.
+- [-] Registro e inicio de sesión de usuarios.
+- [-] Guardar películas favoritas y crear listas personalizadas.
+- [-] Backend propio en Spring Boot + JWT para manejo de cuentas y almacenamiento de datos.
+- [-] Seguridad con autenticación y roles.
+
+## 🛠️ Tecnologías usadas
+
+- **Frontend:** Angular 19, Tailwind CSS
+- **API Externa:** [The Movie Database (TMDb)](https://www.themoviedb.org/)
+- **Estado:** En desarrollo continuo
+
+
+## Instalación
 
 ```bash
+git clone https://github.com/tu-usuario/filmood.git
+cd filmood
+npm install
 ng serve
 ```
 
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
+Accede a la app en: http://localhost:4200
 
-## Additional Resources
+## Créditos
+- API proporcionada por TMDb
 
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+- Desarrollado con ❤️ (y sin saber de diseño) por **Andres Mariano Fernández**
