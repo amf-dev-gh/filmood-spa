@@ -152,6 +152,20 @@
           </svg>
      </ng-container>
 
+     <!-- previous -->
+     <ng-container *ngSwitchCase="'previous'">
+          <svg class="{{ class }}" xmlns="http://www.w3.org/2000/svg" viewBox="0 -960 960 960" fill="currentColor">
+               <path d="M400-80 0-480l400-400 71 71-329 329 329 329-71 71Z" />
+          </svg>
+     </ng-container>
+
+     <!-- next -->
+     <ng-container *ngSwitchCase="'next'">
+          <svg class="{{ class }}" xmlns="http://www.w3.org/2000/svg" viewBox="0 -960 960 960" fill="currentColor">
+               <path d="m321-80-71-71 329-329-329-329 71-71 400 400L321-80Z" />
+          </svg>
+     </ng-container>
+
      <!-- Default -->
      <ng-container *ngSwitchDefault>
           <span class="text-red-500">icon {{name}}</span>
