@@ -38,19 +38,21 @@ html {
   font-style: normal;
 }
 
-.btn-primary {
+.btn-secondary {
   background-color: var(--color-base-turquesa);
+  font-size: small;
+  font-weight: normal;
   color: var(--color-text);
   padding: .4rem 1rem;
   border-radius: 1.5rem;
 }
 
-.btn-primary:hover {
+.btn-secondary:hover {
   background-color: #21867A;
   cursor: pointer;
 }
 
-.btn-secondary {
+.btn-primary {
   background-color: var(--color-base-mostaza);
   font-size: small;
   font-weight: normal;
@@ -59,7 +61,7 @@ html {
   border-radius: 1.5rem;
 }
 
-.btn-secondary:hover {
+.btn-primary:hover {
   background-color: #e6b64c;
   cursor: pointer;
 }
