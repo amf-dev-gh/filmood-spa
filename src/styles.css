@@ -66,6 +66,20 @@ html {
   cursor: pointer;
 }
 
+.btn-card {
+  background-color: var(--color-base-mostaza);
+  font-size: 10px;
+  font-weight: 400;
+  color: var(--color-base-azul);
+  padding: .2rem .5rem;
+  border-radius: 1.5rem;
+}
+
+.btn-card:hover {
+  background-color: #e6b64c;
+  cursor: pointer;
+}
+
 .mask-fade-bottom {
   mask-image: linear-gradient(to bottom, black 60%, transparent 100%);
 }
