@@ -18,3 +18,17 @@ export interface Genre {
   id: number,
   name: string
 }
+
+export interface Video {
+  key:string,
+  name:string,
+  official:boolean,
+  site:string,
+  type:string
+}
+
+export interface Image {
+  file_path:string,
+  height:number,
+  whidth:number
+}
