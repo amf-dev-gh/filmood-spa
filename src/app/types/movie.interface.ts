@@ -7,7 +7,11 @@ export interface Movie {
   overview: string,
   poster_path: string,
   title: string,
-  vote_average: number
+  vote_average: number,
+  tagline:string,
+  genres:Genre[],
+  homepage:string,
+  backdrop_path:string
 }
 
 export interface Genre {

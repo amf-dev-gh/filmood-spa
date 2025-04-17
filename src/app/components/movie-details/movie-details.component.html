@@ -1,3 +1,17 @@
-<section id="movie-details" class="relative mt-15 w-full flex flex-col p-4 lg:py-2.5 lg:px-15">
-  <p>details movie works!</p>
+<section *ngIf="movie" id="movie-details" class="relative mt-15 w-full flex flex-col p-4 lg:py-2.5 lg:px-15">
+  <h1>{{movie.title}}</h1>
+  <div class="flex gap-3">
+    <h1 *ngFor="let genre of movie?.genres">{{genre.name}}</h1>
+  </div>
+  <h1>{{movie.tagline}}</h1>
+  <h1>{{movie.overview}}</h1>
+  <h1>{{movie.release_date}}</h1>
+  <h1>{{movie.vote_average | number:'1.1-1'}}⭐ / 10</h1>
+  <img [src]="'https://image.tmdb.org/t/p/w500/'+movie.backdrop_path" alt="imagen {{movie.title}}" class="w-100 h-auto rounded">
+</section>
+
+<section *ngIf="error" id="movie-details" class="w-full h-[90vh] grid place-content-center place-items-center">
+  <h1 class="text-3xl mb-2">No se pudo obtener detalles de la película</h1>
+  <h1 class="text-xl mb-2">Intente nuevamente mas tarde</h1>
+  <a routerLink="/" class="btn-primary">Voler al inicio</a>
 </section>
