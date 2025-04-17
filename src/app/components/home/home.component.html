@@ -1,0 +1,14 @@
+<section id="home" class="w-full flex flex-col p-3 md:py-2.5 md:px-15">
+
+  <h1 class="text-2xl md:text-3xl mb-3">Películas en cartelera: </h1>
+  <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 lg:grid-cols-10">
+    <div class="w-30 h-auto" *ngFor="let movie of movies">
+      <h1>{{movie.title}}</h1>
+    </div>
+  </div>
+
+  <div class="flex items-center gap-3 font-light">
+    <p>Página {{actualPage}} de {{totalPages}}</p>
+    <button content="Siguiente" (click)="goToNextPage()" class="btn-primary">Siguiente</button>
+  </div>
+</section>

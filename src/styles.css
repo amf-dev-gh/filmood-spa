@@ -1,0 +1,65 @@
+@import "tailwindcss";
+@plugin "@midudev/tailwind-animations";
+
+:root {
+  --color-base-azul: #040D18;
+  --color-base-petroleo: #0A2239;
+  --color-base-turquesa: #2A9D8F;
+  --color-base-mostaza: #FFC857;
+  --color-text: #F8F9FA;
+  --color-text-secondary: #6C757D;
+}
+
+html {
+  font-family: "Poppins";
+  color: var(--color-text);
+  letter-spacing: 1px;
+  background: var(--color-base-azul);
+}
+
+@font-face {
+  font-family: "Poppins";
+  src: url("/fonts/poppins-light-webfont.woff2") format("woff2");
+  font-weight: 300;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Poppins";
+  src: url("/fonts/poppins-regular-webfont.woff2") format("woff2");
+  font-weight: 400;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Poppins";
+  src: url("/fonts/poppins-bold-webfont.woff2") format("woff2");
+  font-weight: bold;
+  font-style: normal;
+}
+
+.btn-primary {
+  background-color: var(--color-base-turquesa);
+  color: var(--color-text);
+  padding: .4rem 1rem;
+  border-radius: 1.5rem;
+}
+
+.btn-primary:hover {
+  background-color: #21867A;
+  cursor: pointer;
+}
+
+.btn-secondary {
+  background-color: var(--color-base-mostaza);
+  font-size: small;
+  font-weight: normal;
+  color: var(--color-base-azul);
+  padding: .4rem 1rem;
+  border-radius: 1.5rem;
+}
+
+.btn-secondary:hover {
+  background-color: #e6b64c;
+  cursor: pointer;
+}
