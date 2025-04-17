@@ -1,15 +1,15 @@
 <section id="home" class="relative w-full mt-15 flex flex-col p-4 lg:py-2.5 lg:px-15">
 
   <!-- bienvenidos -->
-   <div class="h-100 w-full">
+  <div class="h-100 w-full">
     <!-- TO DO... -->
-   </div>
+  </div>
 
   <!-- div actuales -->
   <div class="flex flex-col gap-4 mb-8">
     <h1 class="text-2xl font-bold">Actualmente en cines >></h1>
     <div class="grid gap-4 grid-cols-2 sm:grid-cols-4 lg:grid-cols-8">
-        <!-- card -->
+      <!-- card -->
       <card-movie *ngFor="let movie of actualMovies" [movie]="movie" />
     </div>
   </div>
@@ -20,6 +20,15 @@
     <div class="grid gap-4 grid-cols-2 sm:grid-cols-4 lg:grid-cols-8">
       <!-- card -->
       <card-movie *ngFor="let movie of commingMovies" [movie]="movie" />
+    </div>
+  </div>
+
+  <!-- div populares -->
+  <div class="flex flex-col gap-4 mb-8">
+    <h1 class="text-2xl font-bold">Películas populares >></h1>
+    <div class="grid gap-4 grid-cols-2 sm:grid-cols-4 lg:grid-cols-8">
+      <!-- card -->
+      <card-movie *ngFor="let movie of popularMovies" [movie]="movie" />
     </div>
   </div>
 

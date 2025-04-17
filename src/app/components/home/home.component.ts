@@ -14,10 +14,12 @@ export class HomeComponent implements OnInit {
   private readonly movieService = inject(MovieService);
   actualMovies: Movie[] = [];
   commingMovies: Movie[] = [];
+  popularMovies: Movie[] = [];
 
   ngOnInit(): void {
     this.getActualMovies(1);
-    this.getCommingMovies(1)
+    this.getCommingMovies(2);
+    this.getPopularMovies(3);
   }
 
   getActualMovies(page: number) {
@@ -26,7 +28,7 @@ export class HomeComponent implements OnInit {
         // VALOR QUEMADO, hasta decidir..
         this.actualMovies = response.results.slice(0,8);
       },
-      error: err => console.error("Error loading recent movies", err)
+      error: err => console.error("Error loading actual movies", err)
     })
   }
 
@@ -36,9 +38,17 @@ export class HomeComponent implements OnInit {
         // VALOR QUEMADO, hasta decidir..
         this.commingMovies = response.results.slice(0,8);
       },
-      error: err => console.error("Error loading recent movies", err)
+      error: err => console.error("Error loading comming movies", err)
     })
   }
 
-
+  getPopularMovies(page: number) {
+    this.movieService.getPopularMovies(page).subscribe({
+      next: response => {
+        // VALOR QUEMADO, hasta decidir..
+        this.popularMovies = response.results.slice(0,8);
+      },
+      error: err => console.error("Error loading popular movies", err)
+    })
+  }
 }
