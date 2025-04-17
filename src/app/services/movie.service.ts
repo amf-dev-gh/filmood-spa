@@ -45,12 +45,15 @@ export class MovieService {
     return this.http.get<ApiResponse>(`${this.API_URL_MOVIE}/now_playing?${this.LANGUAGE}&page=${page}&`);
   }
 
+  getUpCommingMovies(page: number): Observable<ApiResponse> {
+    return this.http.get<ApiResponse>(`${this.API_URL_MOVIE}/upcoming?${this.LANGUAGE}&page=${page}&`);
+  }
+
   findMovieByTitle(title: string): Observable<ApiResponse> {
     return this.http.get<ApiResponse>(`${this.API_URL_SEARCH}query=${title}&${this.LANGUAGE}`);
   }
 
-  getGenres():Observable<any>{
+  getGenres(): Observable<any> {
     return this.http.get<any>(`${this.API_URL}/genre/movie/list?${this.LANGUAGE}`);
   }
-
 }
