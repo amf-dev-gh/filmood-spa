@@ -1,12 +1,13 @@
 import { Component, inject, OnInit } from '@angular/core';
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { MovieService } from '../../services/movie.service';
-import { Movie } from '../../types/movie.interface';
+import { Image, Movie, Video } from '../../types/movie.interface';
 import { CommonModule } from '@angular/common';
+import { IconComponent } from "../icon/icon.component";
 
 @Component({
   selector: 'app-movie-details',
-  imports: [CommonModule, RouterLink],
+  imports: [CommonModule, RouterLink, IconComponent],
   templateUrl: './movie-details.component.html'
 })
 export class MovieDetailsComponent implements OnInit{
@@ -16,6 +17,8 @@ export class MovieDetailsComponent implements OnInit{
 
   movie?:Movie;
   error:boolean = false;
+  imageList:Image[] = [];
+  videoList:Video[] = [];
 
   ngOnInit(): void {
     this.route.paramMap.subscribe(params => {
@@ -29,14 +32,36 @@ export class MovieDetailsComponent implements OnInit{
   getMovie(id:string){
     this.movieService.getDetailsMovie(id).subscribe({
       next: response => {
-        console.log(response);
         this.movie = response;
+        this.getImageList(id);
+        this.getVideoList(id);
       },
       error: err => {
         console.error('Error getting movie details', err);
         this.error = true;
       }
     })
+  }
+
+  getVideoList(id:string){
+    this.movieService.getVideoList(id).subscribe({
+      next: data => {
+        this.videoList = data.results;
+        this.videoList = this.videoList.filter(
+          video => video.type.toLowerCase() === 'trailer' 
+          && video.site.toLowerCase() === 'youtube');
+      },
+      error: err => console.error("Error getting videos",err)
+    });
+  }
+
+  getImageList(id:string){
+    this.movieService.getImgageList(id).subscribe({
+      next: data => {
+        this.imageList = data.backdrops;
+      },
+      error: err => console.error("Error getting videos",err)
+    });
   }
 
 }

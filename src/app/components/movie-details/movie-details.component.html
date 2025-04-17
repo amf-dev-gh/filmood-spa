@@ -1,15 +1,40 @@
 <section *ngIf="movie" id="movie-details" class="relative mt-15 w-full flex flex-col p-4 lg:py-2.5 lg:px-15">
-  <h1>{{movie.title}}</h1>
+
+  <!-- muestra la imagen que viene con el detalle de pelicula solo si no tiene backdrops -->
+  <img *ngIf="imageList.length === 0" 
+  [src]="'https://image.tmdb.org/t/p/original/'+movie.backdrop_path" alt="imagen {{movie.title}}" 
+  class="h-[85vh] object-cover mask-fade-x">
+
+  <!-- backdrops, hacer un slider -->
+  <img *ngFor="let img of imageList" 
+  [src]="'https://image.tmdb.org/t/p/original/'+img.file_path" alt="imagen {{movie.title}}" 
+  class="h-[85vh] object-cover mask-fade-x">
+
+  <div class="absolute inset-0 h-[80vh] flex justify-between items-center px-15">
+    <button class="h-15 opacity-50 hover:opacity-90 hover:cursor-pointer hover:scale-110 transition-all">
+      <icon-svg name="previous" class="h-full"/>
+    </button>
+    <button class="h-15 opacity-50 hover:opacity-90 hover:cursor-pointer hover:scale-110 transition-all">
+      <icon-svg name="next" class="h-full"/>
+    </button>
+  </div>
+
   <div class="flex gap-3">
+    <h1>Generos: </h1>
     <h1 *ngFor="let genre of movie?.genres">{{genre.name}}</h1>
   </div>
+  <h1>{{movie.title}}</h1>
   <h1>{{movie.tagline}}</h1>
   <h1>{{movie.overview}}</h1>
-  <h1>{{movie.release_date}}</h1>
-  <h1>{{movie.vote_average | number:'1.1-1'}}⭐ / 10</h1>
-  <img [src]="'https://image.tmdb.org/t/p/w500/'+movie.backdrop_path" alt="imagen {{movie.title}}" class="w-100 h-auto rounded">
+  <h1>Estreno {{movie.release_date}}</h1>
+  <h1>Calificacion: {{movie.vote_average | number:'1.1-1'}}⭐ / 10</h1>
+
+
+
+  <a [href]="'https://www.youtube.com/watch?v='+video.key" target="_blank" *ngFor="let video of videoList">{{video.type}}</a>
 </section>
 
+<!-- pagina de error -->
 <section *ngIf="error" id="movie-details" class="w-full h-[90vh] grid place-content-center place-items-center">
   <h1 class="text-3xl mb-2">No se pudo obtener detalles de la película</h1>
   <h1 class="text-xl mb-2">Intente nuevamente mas tarde</h1>
