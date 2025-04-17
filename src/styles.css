@@ -65,3 +65,36 @@ html {
   background-color: #e6b64c;
   cursor: pointer;
 }
+
+.mask-fade-bottom {
+  mask-image: linear-gradient(to bottom, black 60%, transparent 100%);
+}
+
+.mask-fade-top {
+  mask-image: linear-gradient(to top, black 25%, transparent 100%);
+}
+
+.mask-fade-x {
+  mask-image: linear-gradient(to right, transparent 0%, black 15%, black 85%, transparent 100%);
+}
+
+header {
+  background-color: transparent;
+  animation: header-blur-scroll 0.3s linear both;
+  animation-timeline: scroll();
+  animation-range: 0 250px;
+  border-bottom: 1px solid transparent;
+}
+
+@keyframes header-blur-scroll{
+  0%{
+    backdrop-filter: blur(0px);
+    background: transparent;
+  }
+
+  100%{
+    backdrop-filter: blur(10px);
+    background: rgba(4, 13, 24, .5);
+    border-bottom-color: #040D18;
+  }
+}
