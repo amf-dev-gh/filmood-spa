@@ -1,0 +1,4 @@
+<div class="relative w-full h-auto border border-amber-50 group hover:scale-105 transition-all rounded" [title]="movie?.title">
+  <img [src]="'https://image.tmdb.org/t/p/w300/'+movie?.poster_path" alt="imagen {{movie?.title}}" class="aspect-[579/869] w-full h-auto rounded">
+  <a [routerLink]="'/movie/'+movie?.id" class="absolute bottom-0 right-0 btn-card opacity-0 group-hover:opacity-100 me-1 mb-1 transition-all">+ info</a>
+</div>
