@@ -6,15 +6,14 @@
   class="h-[85vh] object-cover mask-fade-x">
 
   <!-- backdrops, hacer un slider -->
-  <img *ngFor="let img of imageList" 
-  [src]="'https://image.tmdb.org/t/p/original/'+img.file_path" alt="imagen {{movie.title}}" 
-  class="h-[85vh] object-cover mask-fade-x">
+  <img [src]="'https://image.tmdb.org/t/p/original/'+imageList[showIndex].file_path" alt="imagen {{movie.title}}" 
+  class="h-[85vh] object-cover mask-fade-x animate-fade-in">
 
-  <div class="absolute inset-0 h-[80vh] flex justify-between items-center px-15">
-    <button class="h-15 opacity-50 hover:opacity-90 hover:cursor-pointer hover:scale-110 transition-all">
+  <div *ngIf="imageList.length > 1" class="absolute inset-0 h-[80vh] flex justify-between items-center px-15">
+    <button (click)="previousImage()" class="h-15 opacity-50 hover:opacity-90 hover:cursor-pointer hover:scale-110 transition-all">
       <icon-svg name="previous" class="h-full"/>
     </button>
-    <button class="h-15 opacity-50 hover:opacity-90 hover:cursor-pointer hover:scale-110 transition-all">
+    <button (click)="nextImage()" class="h-15 opacity-50 hover:opacity-90 hover:cursor-pointer hover:scale-110 transition-all">
       <icon-svg name="next" class="h-full"/>
     </button>
   </div>

@@ -10,26 +10,28 @@ import { IconComponent } from "../icon/icon.component";
   imports: [CommonModule, RouterLink, IconComponent],
   templateUrl: './movie-details.component.html'
 })
-export class MovieDetailsComponent implements OnInit{
+export class MovieDetailsComponent implements OnInit {
 
   private readonly movieService = inject(MovieService);
   private readonly route = inject(ActivatedRoute);
 
-  movie?:Movie;
-  error:boolean = false;
-  imageList:Image[] = [];
-  videoList:Video[] = [];
+  movie?: Movie;
+  error: boolean = false;
+  imageList: Image[] = [];
+  videoList: Video[] = [];
+
+  showIndex: number = 0;
 
   ngOnInit(): void {
     this.route.paramMap.subscribe(params => {
       const id = params.get('id')
-      if(id){
+      if (id) {
         this.getMovie(id);
       }
     })
   }
 
-  getMovie(id:string){
+  getMovie(id: string) {
     this.movieService.getDetailsMovie(id).subscribe({
       next: response => {
         this.movie = response;
@@ -43,25 +45,40 @@ export class MovieDetailsComponent implements OnInit{
     })
   }
 
-  getVideoList(id:string){
+  getVideoList(id: string) {
     this.movieService.getVideoList(id).subscribe({
       next: data => {
         this.videoList = data.results;
         this.videoList = this.videoList.filter(
-          video => video.type.toLowerCase() === 'trailer' 
-          && video.site.toLowerCase() === 'youtube');
+          video => video.type.toLowerCase() === 'trailer'
+            && video.site.toLowerCase() === 'youtube');
       },
-      error: err => console.error("Error getting videos",err)
+      error: err => console.error("Error getting videos", err)
     });
   }
 
-  getImageList(id:string){
+  getImageList(id: string) {
     this.movieService.getImgageList(id).subscribe({
       next: data => {
         this.imageList = data.backdrops;
       },
-      error: err => console.error("Error getting videos",err)
+      error: err => console.error("Error getting videos", err)
     });
   }
 
+  nextImage() {
+    if (this.showIndex < this.imageList.length - 1) {
+      this.showIndex += 1;
+    } else {
+      this.showIndex = 0;
+    }
+  }
+
+  previousImage() {
+    if (this.showIndex === 0) {
+      this.showIndex = this.imageList.length -1;
+    } else {
+      this.showIndex -= 1;
+    }
+  }
 }
