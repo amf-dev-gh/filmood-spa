@@ -57,6 +57,14 @@ export class MovieService {
     return this.http.get<Movie>(`${this.API_URL_MOVIE}/${id}?${this.LANGUAGE}`);
   }
 
+  getVideoList(id: string): Observable<any> {
+    return this.http.get<any>(`${this.API_URL_MOVIE}/${id}/videos?${this.LANGUAGE}`);
+  }
+
+  getImgageList(id: string): Observable<any> {
+    return this.http.get<any>(`${this.API_URL_MOVIE}/${id}/images?include_image_language=es`);
+  }
+
   getPopularMovies(page: number): Observable<ApiResponse> {
     return this.http.get<ApiResponse>(`${this.API_URL_MOVIE}/popular?${this.LANGUAGE}&page=${page}`);
   }
