@@ -1,29 +1,53 @@
-<header class="z-10 w-full sticky top-0">
-  <nav class="flex justify-between items-center gap-4 p-3 md:py-2.5 md:px-15 w-full h-15">
-    <a routerLink="/" class="flex gap-1 items-baseline h-full w-auto hover:cursor-pointer">
-      <icon-svg name="fm-icon" class="h-10 w-auto" />
-      <icon-svg name="fm-horizontal" class="h-7 w-auto" />
-    </a>
+<header class="z-10 w-full fixed top-0 text-sm lg:text-base">
+  <nav class="flex flex-col md:flex-row justify-between items-center gap-4 p-3 lg:py-2.5 lg:px-15 w-full h-auto"
+  [ngClass]="showMenu ? 'openMenu':''">
+    <div class="flex justify-between items-center w-full md:w-auto">
+      <a routerLink="/" class="flex gap-1 items-baseline w-auto hover:cursor-pointer" (click)="closeMenu()">
+        <icon-svg name="fm-icon" class="h-7 lg:h-10 w-auto" />
+        <icon-svg name="fm-horizontal" class="h-7 lg:h-10 w-auto" />
+      </a>
 
-    <ul class="flex gap-4 items-center">
+      <button (click)="openClose()" class="md:hidden h-10 hover:cursor-pointer">
+        <icon-svg name="menu" class="h-full" />
+      </button>
+    </div>
+
+    <!-- menu expansible -->
+    <div class="flex flex-col gap-8 text-2xl items-center py-2 transition-all animate-fade-in" [ngClass]="showMenu ? '':'hidden'">
+      <a routerLink="/home" class=" hover:underline" (click)="closeMenu()">Inicio</a>
+      <a routerLink="/movies" class=" hover:underline" (click)="closeMenu()">Peliculas</a>
+      <a routerLink="/categories" class=" hover:underline" (click)="closeMenu()">Categorías</a>
+      <a routerLink="/moods" class=" hover:underline" (click)="closeMenu()">Mis moods</a>
+      <a routerLink="/about" class=" hover:underline" (click)="closeMenu()">Sobre la web</a>
+      <a routerLink="/login" class=" hover:underline" (click)="closeMenu()">Iniciar sesión</a>
+    </div>
+
+    <ul class="hidden md:flex md:gap-4">
       <li>
-        <a routerLink="/home" class="hover:text-[var(--color-base-turquesa)] hover:underline underline-offset-2 hover:cursor-pointer">Inicio</a>
+        <a routerLink="/home"
+          class="hover:text-[var(--color-base-turquesa)] hover:underline underline-offset-2 hover:cursor-pointer">Inicio</a>
       </li>
       <li>
-        <a routerLink="/movies" class="hover:text-[var(--color-base-turquesa)] hover:underline underline-offset-2 hover:cursor-pointer">Peliculas</a>
+        <a routerLink="/movies"
+          class="hover:text-[var(--color-base-turquesa)] hover:underline underline-offset-2 hover:cursor-pointer">Peliculas</a>
       </li>
       <li>
-        <a routerLink="/categories" class="hover:text-[var(--color-base-turquesa)] hover:underline underline-offset-2 hover:cursor-pointer">Categorías</a>
+        <a routerLink="/categories"
+          class="hover:text-[var(--color-base-turquesa)] hover:underline underline-offset-2 hover:cursor-pointer">Categorías</a>
       </li>
       <li>
-        <a routerLink="/moods" class="hover:text-[var(--color-base-turquesa)] hover:underline underline-offset-2 hover:cursor-pointer">Mis moods</a>
+        <a routerLink="/moods"
+          class="hover:text-[var(--color-base-turquesa)] hover:underline underline-offset-2 hover:cursor-pointer">Mis
+          moods</a>
       </li>
       <li>
-        <a routerLink="/about" class="hover:text-[var(--color-base-turquesa)] hover:underline underline-offset-2 hover:cursor-pointer">Sobre la web</a>
+        <a routerLink="/about"
+          class="hover:text-[var(--color-base-turquesa)] hover:underline underline-offset-2 hover:cursor-pointer">Sobre
+          la web</a>
       </li>
     </ul>
-    
-    <button class="btn-secondary">Iniciar Sesión</button>
 
-  </nav> 
+    <a routerLink="/login" class="btn-secondary hidden md:inline">Iniciar Sesión</a>
+
+  </nav>
 </header>

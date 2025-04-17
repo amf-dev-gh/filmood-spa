@@ -1,0 +1,26 @@
+header {
+  background-color: transparent;
+  animation: header-blur-scroll 0.3s linear both;
+  animation-timeline: scroll();
+  animation-range: 0 250px;
+  border-bottom: 1px solid transparent;
+}
+
+@keyframes header-blur-scroll{
+  0%{
+    backdrop-filter: blur(0px);
+    background: transparent;
+  }
+
+  100%{
+    backdrop-filter: blur(10px);
+    background: rgba(4, 13, 24, .5);
+    border-bottom-color: #040D18;
+  }
+}
+
+.openMenu {
+  backdrop-filter: blur(10px);
+  background: rgba(4, 13, 24, .7);
+  border-bottom-color: #040D18;
+}
