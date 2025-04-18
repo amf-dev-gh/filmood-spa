@@ -6,9 +6,9 @@ Filmood es una aplicación web desarrollada con **Angular** que permite a los us
 
 ## 🚀 Funcionalidades a desarrollar
 
-- [-] Explora películas populares, top rated y en cartelera.
+- [✅] Explora películas populares, top rated y en cartelera.
 - [-] Búsqueda de películas por nombre.
-- [-] Detalles de cada película: título, sinopsis, fecha de estreno, puntuación y más.
+- [✅] Detalles de cada película: título, sinopsis, fecha de estreno, puntuación y más.
 - [-] Interfaz moderna y responsive desarrollada con **Angular 19** y **Tailwind CSS 4**.
 - [-] Registro e inicio de sesión de usuarios.
 - [-] Guardar películas favoritas y crear listas personalizadas.
@@ -25,7 +25,7 @@ Filmood es una aplicación web desarrollada con **Angular** que permite a los us
 ## Instalación
 
 ```bash
-git clone https://github.com/tu-usuario/filmood.git
+git clone https://github.com/amf-dev-gh/filmood-spa.git
 cd filmood
 npm install
 ng serve
