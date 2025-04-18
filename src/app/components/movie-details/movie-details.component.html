@@ -27,24 +27,59 @@
     <h2 class="text-sm lg:text-2xl font-bold">{{movie.tagline}}</h2>
     <h3 class="text-[10px] md:text-sm lg:text-base">{{movie.overview}}</h3>
     <div class="flex gap-3 text-[10px] md:text-sm lg:text-base">
-      <h4>Fecha de estreno {{movie.release_date}}</h4>
-      <h4>Calificacion: {{movie.vote_average | number:'1.1-1'}}/10 ⭐</h4>
+      <h4 class="font-bold">Fecha de estreno {{movie.release_date}}</h4>
+      <h4 class="font-bold">Calificacion: {{movie.vote_average | number:'1.1-1'}}/10 ⭐</h4>
     </div>
     <div class="flex gap-3 text-[10px] md:text-sm lg:text-base">
-      <h4>Generos: </h4>
+      <h4 class="font-bold">Géneros: </h4>
       <p *ngFor="let genre of movie?.genres">{{genre.name}}</p>
     </div>
   </div>
 </section>
 
-<section *ngIf="videoList" id="movieTrailer" class="w-full px-7 lg:py-2.5 lg:px-15 flex flex-col gap-3 justify-center items-center">
+<!-- TO DO disponible en.... -->
+ <section></section>
+
+ <!-- seccion de video trailer -->
+<section *ngIf="videoList.length" id="movieTrailer" class="w-full px-7 lg:py-2.5 lg:px-15 flex flex-col gap-3 justify-center items-center animate-fade-in animate-delay-700">
   <h2 class="text-center text-xl md:text-2xl lg:text-4xl font-bold">Trailer</h2>
   <ngx-lite-youtube class="w-full lg:w-[50%] h-auto border shadow-md shadow-white/50" [videoId]="videoList[0].key" thumbQuality="high" [videoTitle]="'🎞️ ' + movie?.title"></ngx-lite-youtube>
 </section>
 
-<!-- TO DO... -->
- <section *ngIf="movie" id="credits" class="w-full px-7 lg:py-2.5 lg:px-15 flex flex-col gap-3 justify-center items-center">
-  <h2 class="text-center text-xl md:text-2xl lg:text-4xl font-bold">Credits</h2>
+<!-- TO DO seccion de creditos... -->
+ <section *ngIf="movie" id="credits" class="w-full py-4 px-7 lg:py-2.5 lg:px-15 flex flex-col gap-3 justify-center items-center animate-fade-in animate-delay-900">
+  <h2 class="text-center text-xl md:text-2xl lg:text-4xl font-bold">Créditos</h2>
+
+  <div *ngIf="direction.length > 0" class="flex flex-col gap-2 justify-center items-center">
+    <p class="text-xl">Dirección</p>
+    <p *ngFor="let data of direction">{{data.name}}</p>
+  </div>
+
+  <div *ngIf="screenplay.length > 0" class="flex flex-col gap-2 justify-center items-center">
+    <p class="text-xl">Guión</p>
+    <p *ngFor="let data of screenplay">{{data.name}}</p>
+  </div>
+
+  <div *ngIf="cast.length > 0" class="flex flex-col gap-2 justify-center items-center">
+    <p class="text-xl">Reparto</p>
+    <p *ngFor="let data of cast.slice(0,10)">{{data.name}} como {{data.character}}</p>
+  </div>
+
+  <div *ngIf="music.length > 0" class="flex flex-col gap-2 justify-center items-center">
+    <p class="text-xl">Música</p>
+    <p *ngFor="let data of music">{{data.name}}</p>
+  </div>
+
+  <div *ngIf="photograph.length > 0" class="flex flex-col gap-2 justify-center items-center">
+    <p class="text-xl">Fotografía</p>
+    <p *ngFor="let data of photograph">{{data.name}}</p>
+  </div>
+
+  <div *ngIf="companies.length > 0" class="flex flex-col gap-2 justify-center items-center">
+    <p class="text-xl">Compañías</p>
+    <p *ngFor="let data of companies">{{data.name}}</p>
+  </div>
+
  </section>
 
 <!-- pagina de error -->
