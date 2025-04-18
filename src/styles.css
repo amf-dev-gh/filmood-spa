@@ -85,7 +85,7 @@ body::before {
 
 .btn-card {
   background-color: var(--color-base-mostaza);
-  font-size: 10px;
+  font-size: 13px;
   font-weight: 400;
   color: var(--color-base-azul);
   padding: .2rem .5rem;
