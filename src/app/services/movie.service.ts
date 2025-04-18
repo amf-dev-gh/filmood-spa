@@ -1,7 +1,7 @@
 import { inject, Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { ApiResponse } from '../types/apiResponse.interface';
+import { ApiResponse, CreditsResponse } from '../types/apiResponse.interface';
 import { Genre, Movie } from '../types/movie.interface';
 
 @Injectable({
@@ -32,6 +32,12 @@ export class MovieService {
 
   // # Listado de generos de peliculas
   // # https://api.themoviedb.org/3/genre/movie/list?language=es-ES
+
+  // # Trending de peliculas de la semana
+  // # https://api.themoviedb.org/3/trending/movie/week?language=es-ES
+
+  // # Creditos de una pelicula,(Reparto....)
+  // # https://api.themoviedb.org/3/movie/{movie_id}/credits?language=es-ES
 
 
   private readonly http = inject(HttpClient);
@@ -69,7 +75,15 @@ export class MovieService {
     return this.http.get<ApiResponse>(`${this.API_URL_MOVIE}/popular?${this.LANGUAGE}&page=${page}`);
   }
 
+  getTrendingMovies(page: number): Observable<ApiResponse> {
+    return this.http.get<ApiResponse>(`${this.API_URL}/trending/movie/week?${this.LANGUAGE}&page=${page}`);
+  }
+
   getGenres(): Observable<any> {
     return this.http.get<any>(`${this.API_URL}/genre/movie/list?${this.LANGUAGE}`);
+  }
+
+  getCredits(id:string): Observable<CreditsResponse> {
+    return this.http.get<CreditsResponse>(`${this.API_URL_MOVIE}/${id}/credits?${this.LANGUAGE}`);
   }
 }
