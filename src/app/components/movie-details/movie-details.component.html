@@ -1,17 +1,18 @@
-<section *ngIf="movie" id="movie-details" class="relative mt-15 w-full flex flex-col p-4 lg:py-2.5 lg:px-15">
+<section *ngIf="movie && !error" id="movie-details" class="relative mt-15 w-full flex flex-col p-4 lg:py-2.5 lg:px-15">
 
   <!-- muestra la imagen que viene con el detalle de pelicula solo si no tiene backdrops -->
-  <img *ngIf="imageList.length == 1" 
+  <img *ngIf="!imageList.length" 
   [src]="getFullImageUrl(movie.backdrop_path)"
   alt="imagen {{movie.title}}" 
-  class="max-h-[90vh] object-cover mask-fade-xy animate-fade-in">
+  class="max-h-[85vh] object-cover mask-fade-xy animate-fade-in">
 
   <!-- backdrops, hacer un slider si la lista de imagenes tiene datos -->
-  <img *ngIf="imageList.length > 1" [src]="getFullImageUrl(imageList[showIndex].file_path)" alt="imagen {{movie.title}}" 
-  class="max-h-[90vh] object-cover mask-fade-xy animate-fade-in "
+  <img *ngIf="imageList.length >= 1" [src]="getFullImageUrl(imageList[showIndex].file_path)" alt="imagen {{movie.title}}" 
+  class="max-h-[85vh] object-cover mask-fade-xy animate-fade-in "
   [ngClass]="effectSlider">
 
-  <div *ngIf="imageList.length > 1" class="absolute inset-0 h-[40vh] sm:h-[55vh] md:h-[70vh] lg:h-[90vh] flex justify-between items-center px-4 lg:px-15">
+  <!-- botones de slider -->
+  <div *ngIf="imageList.length > 1" class="absolute z-10 inset-0 h-[40vh] sm:h-[55vh] md:h-[70vh] lg:h-[85vh] flex justify-between items-center px-4 lg:px-15">
     <button (click)="previousImage()" class="h-7 md:h-11 lg:h-14 opacity-50 hover:opacity-90 hover:cursor-pointer hover:scale-110 transition-all">
       <icon-svg name="previous" class="h-full"/>
     </button>
@@ -20,20 +21,31 @@
     </button>
   </div>
 
-  <div class="absolute bottom-8 left-25 max-w-6xl bg-black/55 py-5 px-10 mask-fade-xy animate-fade-in animate-delay-400">
-    <h1 class="text-5xl font-bold">{{movie.title}}</h1>
-    <h2 class="text-2xl font-bold">{{movie.tagline}}</h2>
-    <h3>{{movie.overview}}</h3>
-    <div class="flex gap-3">
+  <!-- informacion de la pelicula -->
+  <div class="sm:absolute bottom-0 left-0 bg-black/55 py-5 px-5 md:px-10 lg:px-30 mask-fade-xy animate-fade-in animate-delay-400">
+    <h1 class="text-xl md:text-2xl lg:text-5xl font-bold">{{movie.title}}</h1>
+    <h2 class="text-sm lg:text-2xl font-bold">{{movie.tagline}}</h2>
+    <h3 class="text-[10px] md:text-sm lg:text-base">{{movie.overview}}</h3>
+    <div class="flex gap-3 text-[10px] md:text-sm lg:text-base">
+      <h4>Fecha de estreno {{movie.release_date}}</h4>
+      <h4>Calificacion: {{movie.vote_average | number:'1.1-1'}}/10 ⭐</h4>
+    </div>
+    <div class="flex gap-3 text-[10px] md:text-sm lg:text-base">
       <h4>Generos: </h4>
       <p *ngFor="let genre of movie?.genres">{{genre.name}}</p>
     </div>
-    <h4>Calificacion: {{movie.vote_average | number:'1.1-1'}}/10 ⭐</h4>
-    <h4>Fecha de estreno {{movie.release_date}}</h4>
   </div>
 </section>
 
-<!-- <a [href]="'https://www.youtube.com/watch?v='+video.key" target="_blank" *ngFor="let video of videoList">{{video.type}}</a> -->
+<section *ngIf="videoList" id="movieTrailer" class="w-full px-7 lg:py-2.5 lg:px-15 flex flex-col gap-3 justify-center items-center">
+  <h2 class="text-center text-xl md:text-2xl lg:text-4xl font-bold">Trailer</h2>
+  <ngx-lite-youtube class="w-full lg:w-[50%] h-auto border shadow-md shadow-white/50" [videoId]="videoList[0].key" thumbQuality="high" [videoTitle]="'🎞️ ' + movie?.title"></ngx-lite-youtube>
+</section>
+
+<!-- TO DO... -->
+ <section *ngIf="movie" id="credits" class="w-full px-7 lg:py-2.5 lg:px-15 flex flex-col gap-3 justify-center items-center">
+  <h2 class="text-center text-xl md:text-2xl lg:text-4xl font-bold">Credits</h2>
+ </section>
 
 <!-- pagina de error -->
 <section *ngIf="error" id="movie-details" class="w-full h-[90vh] grid place-content-center place-items-center">

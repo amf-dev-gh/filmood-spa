@@ -1,13 +1,14 @@
 import { Component, inject, OnInit } from '@angular/core';
-import { ActivatedRoute, Router, RouterLink } from '@angular/router';
+import { ActivatedRoute, RouterLink } from '@angular/router';
 import { MovieService } from '../../services/movie.service';
 import { Image, Movie, Video } from '../../types/movie.interface';
 import { CommonModule } from '@angular/common';
 import { IconComponent } from "../icon/icon.component";
+import { NgxLiteYoutubeModule } from 'ngx-lite-video';
 
 @Component({
   selector: 'app-movie-details',
-  imports: [CommonModule, RouterLink, IconComponent],
+  imports: [CommonModule, RouterLink, IconComponent, NgxLiteYoutubeModule],
   templateUrl: './movie-details.component.html'
 })
 export class MovieDetailsComponent implements OnInit {
@@ -92,7 +93,4 @@ export class MovieDetailsComponent implements OnInit {
     return `https://image.tmdb.org/t/p/original${path}`;
   }
 
-  getFullVideoUrl(path:string):string{
-    return `https://www.youtube.com/watch?v=${path}`;
-  }
 }
