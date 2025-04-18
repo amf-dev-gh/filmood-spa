@@ -32,3 +32,14 @@ export interface Image {
   height:number,
   whidth:number
 }
+
+export interface Person {
+  id:number,
+  gender:number,
+  known_for_department:string,
+  original_name:string,
+  character:string,// nombre de personaje
+  profile_path:String,
+  job:string
+  name:string,
+}
