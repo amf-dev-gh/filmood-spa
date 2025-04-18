@@ -5,6 +5,16 @@
     <!-- TO DO... -->
   </div>
 
+
+  <!-- div trending -->
+  <div class="flex flex-col gap-4 mb-8">
+    <h1 class="text-2xl font-bold">Trending de la semana >></h1>
+    <div class="grid gap-4 grid-cols-2 sm:grid-cols-4 lg:grid-cols-8">
+      <!-- card -->
+      <card-movie *ngFor="let movie of trendingMovies" [movie]="movie" />
+    </div>
+  </div>
+
   <!-- div actuales -->
   <div class="flex flex-col gap-4 mb-8">
     <h1 class="text-2xl font-bold">Actualmente en cines >></h1>
@@ -20,15 +30,6 @@
     <div class="grid gap-4 grid-cols-2 sm:grid-cols-4 lg:grid-cols-8">
       <!-- card -->
       <card-movie *ngFor="let movie of commingMovies" [movie]="movie" />
-    </div>
-  </div>
-
-  <!-- div populares -->
-  <div class="flex flex-col gap-4 mb-8">
-    <h1 class="text-2xl font-bold">Películas populares >></h1>
-    <div class="grid gap-4 grid-cols-2 sm:grid-cols-4 lg:grid-cols-8">
-      <!-- card -->
-      <card-movie *ngFor="let movie of popularMovies" [movie]="movie" />
     </div>
   </div>
 

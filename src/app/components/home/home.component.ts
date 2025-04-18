@@ -14,12 +14,12 @@ export class HomeComponent implements OnInit {
   private readonly movieService = inject(MovieService);
   actualMovies: Movie[] = [];
   commingMovies: Movie[] = [];
-  popularMovies: Movie[] = [];
+  trendingMovies: Movie[] = [];
 
   ngOnInit(): void {
     this.getActualMovies(1);
     this.getCommingMovies(2);
-    this.getPopularMovies(3);
+    this.getTrendingMovies(3);
   }
 
   getActualMovies(page: number) {
@@ -42,13 +42,13 @@ export class HomeComponent implements OnInit {
     })
   }
 
-  getPopularMovies(page: number) {
-    this.movieService.getPopularMovies(page).subscribe({
+  getTrendingMovies(page: number) {
+    this.movieService.getTrendingMovies(page).subscribe({
       next: response => {
         // VALOR QUEMADO, hasta decidir..
-        this.popularMovies = response.results.slice(0,8);
+        this.trendingMovies = response.results.slice(0,8);
       },
-      error: err => console.error("Error loading popular movies", err)
+      error: err => console.error("Error loading trending movies", err)
     })
   }
 }
