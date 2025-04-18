@@ -21,6 +21,7 @@ export class MovieDetailsComponent implements OnInit {
   videoList: Video[] = [];
 
   showIndex: number = 0;
+  effectSlider:string = '';
 
   ngOnInit(): void {
     this.route.paramMap.subscribe(params => {
@@ -29,6 +30,9 @@ export class MovieDetailsComponent implements OnInit {
         this.getMovie(id);
       }
     })
+    setInterval(() => {
+      this.nextImage();
+    }, 4000);
   }
 
   getMovie(id: string) {
@@ -72,6 +76,7 @@ export class MovieDetailsComponent implements OnInit {
     } else {
       this.showIndex = 0;
     }
+    this.effectSlider = 'animate-slide-in-right';
   }
 
   previousImage() {
@@ -80,5 +85,14 @@ export class MovieDetailsComponent implements OnInit {
     } else {
       this.showIndex -= 1;
     }
+    this.effectSlider = 'animate-slide-in-left';
+  }
+
+  getFullImageUrl(path:string):string{
+    return `https://image.tmdb.org/t/p/original${path}`;
+  }
+
+  getFullVideoUrl(path:string):string{
+    return `https://www.youtube.com/watch?v=${path}`;
   }
 }
