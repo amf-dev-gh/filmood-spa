@@ -40,7 +40,7 @@ export interface Person {
   known_for_department: string,
   original_name: string,
   character: string,// nombre de personaje
-  profile_path: String,
+  profile_path: string,
   job: string
   name: string,
 }
