@@ -6,10 +6,11 @@ import { CommonModule } from '@angular/common';
 import { IconComponent } from "../icon/icon.component";
 import { NgxLiteYoutubeModule } from 'ngx-lite-video';
 import { CreditsResponse } from '../../types/apiResponse.interface';
+import { CreditsComponent } from "./credits/credits.component";
 
 @Component({
   selector: 'app-movie-details',
-  imports: [CommonModule, RouterLink, IconComponent, NgxLiteYoutubeModule],
+  imports: [CommonModule, RouterLink, IconComponent, NgxLiteYoutubeModule, CreditsComponent],
   templateUrl: './movie-details.component.html'
 })
 export class MovieDetailsComponent implements OnInit {
@@ -22,12 +23,7 @@ export class MovieDetailsComponent implements OnInit {
   imageList: Image[] = [];
   videoList: Video[] = [];
 
-  direction:Person[] = [];
-  screenplay:Person[] = []; // Guionista
-  cast:Person[] = [];
-  music:Person[] = [];
-  photograph:Person[] = [];
-  companies:ProductionCompany[] = [];
+  credits?:CreditsResponse;
 
   showIndex: number = 0;
   effectSlider:string = '';
@@ -39,9 +35,9 @@ export class MovieDetailsComponent implements OnInit {
         this.getMovie(id);
       }
     })
-    setInterval(() => {
-      this.nextImage();
-    }, 4000);
+    // setInterval(() => {
+    //   this.nextImage();
+    // }, 4000);
   }
 
   getMovie(id: string) {
@@ -105,21 +101,9 @@ export class MovieDetailsComponent implements OnInit {
   getCredits(id:string){
     this.movieService.getCredits(id).subscribe({
       next: data => {
-        this.getInfoCredits(data);
+        this.credits = data;
       },
       error: err => console.error("Error getting credits",err)
     })
   }
-
-  getInfoCredits(data: CreditsResponse){
-    this.direction = data.crew.filter(c => c.job.toLowerCase() === "director");
-    this.screenplay = data.crew.filter(c => c.job.toLowerCase() === "screenplay");
-    this.cast = data.cast.filter(c => c.known_for_department.toLowerCase() === "acting");
-    this.music = data.crew.filter(c => c.job.toLowerCase() === "original music composer");
-    this.photograph = data.crew.filter(c => c.job.toLowerCase() === "director of hotography");
-    if(this.movie){
-      this.companies = this.movie.production_companies;
-    }
-  }
-
 }
