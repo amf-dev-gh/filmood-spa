@@ -1,40 +1,40 @@
 <section class="w-full py-4 px-7 lg:py-2.5 lg:px-15 flex flex-col gap-4 justify-center items-center animate-fade-in animate-delay-900">
   <h2 class="text-center text-xl md:text-2xl lg:text-4xl font-bold">Créditos</h2>
   
-  <h3 class="md:text-xl lg:text-2xl font-bold underline-offset-2 underline">Reparto</h3>
-    <div *ngIf="cast.length > 0" class="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-6 lg:grid-cols-8 xl:grid-cols-10 gap-8 overflow-hidden">
-      <div *ngFor="let actor of cast.slice(0,10)" class="relative rounded w-full border-2 border-[var(--color-text-secondary)] hover:border-[var(--color-text)] transition-colors">
-        <img [src]="getFullImageUrl(actor.profile_path)" alt="imagen perfil {{actor.name}}" class="rounded-xs w-full h-auto">
-        <p class="absolute bottom-0 w-full p-1 z-10 text-sm md:text-[12px] rounded">{{actor.name}}<br>({{actor.character}})</p>
-        <span class="w-full h-full absolute bg-black/80 inset-0 mask-fade-top rounded"></span>
-      </div>
+  <h3 *ngIf="cast.length" class="md:text-xl lg:text-2xl font-bold underline-offset-2 underline">Reparto</h3>
+  <div *ngIf="cast.length" class="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-6 lg:grid-cols-8 xl:grid-cols-10 gap-2 overflow-hidden">
+    <div *ngFor="let actor of cast.slice(0,10)" class="relative rounded w-full border-2 border-[var(--color-text-secondary)] hover:border-[var(--color-text)] transition-colors">
+      <img [src]="getFullImageUrl(actor.profile_path)" alt="imagen perfil {{actor.name}}" class="rounded-xs w-full h-auto">
+      <p class="absolute bottom-0 w-full p-1 z-10 text-sm md:text-[12px] rounded">{{actor.name}}<br>({{actor.character}})</p>
+      <span class="w-full h-full absolute bg-black/80 inset-0 mask-fade-top rounded"></span>
     </div>
+  </div>
 
-    <div class="flex gap-6 justify-center items-start mt-2 flex-wrap">
-      <div *ngIf="direction.length > 0" class="flex flex-col gap-1 justify-center items-center">
-        <h3 class="md:text-xl lg:text-2xl font-bold underline-offset-2 underline">Dirección</h3>
-        <p *ngFor="let director of direction"  >{{director.name}}</p>
-      </div>
-    
-      <div *ngIf="screenplay.length > 0" class="flex flex-col gap-2 justify-center items-center">
-        <h3 class="md:text-xl lg:text-2xl font-bold underline-offset-2 underline">Guión</h3>
-        <p *ngFor="let sp of screenplay"  >{{sp.name}}</p>
-      </div>
-    
-      <div *ngIf="music.length > 0" class="flex flex-col gap-2 justify-center items-center">
-        <h3 class="md:text-xl lg:text-2xl font-bold underline-offset-2 underline">Música</h3>
-        <p *ngFor="let mus of music"  >{{mus.name}}</p>
-      </div>
-    
-      <div *ngIf="photograph.length > 0" class="flex flex-col gap-2 justify-center items-center">
-        <h3 class="md:text-xl lg:text-2xl font-bold underline-offset-2 underline">Fotografía</h3>
-        <p *ngFor="let ph of photograph"  >{{ph.name}}</p>
-      </div>
-    
-      <div *ngIf="companies.length > 0" class="flex flex-col gap-2 justify-center items-center">
-        <h3 class="md:text-xl lg:text-2xl font-bold underline-offset-2 underline">Compañías</h3>
-        <p *ngFor="let company of companies"  >{{company.name}}</p>
-      </div>
+  <div class="flex gap-6 justify-center items-start mt-2 flex-wrap">
+    <div *ngIf="direction.length" class="flex flex-col gap-1 justify-center items-center">
+      <h3 class="md:text-xl lg:text-2xl font-bold underline-offset-2 underline">Dirección</h3>
+      <p *ngFor="let director of direction"  >{{director.name}}</p>
     </div>
-
- </section>
+  
+    <div *ngIf="screenplay.length" class="flex flex-col gap-2 justify-center items-center">
+      <h3 class="md:text-xl lg:text-2xl font-bold underline-offset-2 underline">Guión</h3>
+      <p *ngFor="let sp of screenplay"  >{{sp.name}}</p>
+    </div>
+  
+    <div *ngIf="music.length" class="flex flex-col gap-2 justify-center items-center">
+      <h3 class="md:text-xl lg:text-2xl font-bold underline-offset-2 underline">Música</h3>
+      <p *ngFor="let mus of music"  >{{mus.name}}</p>
+    </div>
+  
+    <div *ngIf="photograph.length" class="flex flex-col gap-2 justify-center items-center">
+      <h3 class="md:text-xl lg:text-2xl font-bold underline-offset-2 underline">Fotografía</h3>
+      <p *ngFor="let ph of photograph"  >{{ph.name}}</p>
+    </div>
+  
+    <div *ngIf="companies.length" class="flex flex-col gap-2 justify-center items-center">
+      <h3 class="md:text-xl lg:text-2xl font-bold underline-offset-2 underline">Compañías</h3>
+      <p *ngFor="let company of companies"  >{{company.name}}</p>
+    </div>
+  </div>
+  
+</section>
