@@ -12,28 +12,28 @@
 
     <div class="flex gap-6 justify-center items-start mt-2 flex-wrap">
       <div *ngIf="direction.length > 0" class="flex flex-col gap-1 justify-center items-center">
-        <h3 class="md:text-xl lg:text-2xl font-bold">Dirección</h3>
-        <p *ngFor="let data of direction"  >{{data.name}}</p>
+        <h3 class="md:text-xl lg:text-2xl font-bold underline-offset-2 underline">Dirección</h3>
+        <p *ngFor="let director of direction"  >{{director.name}}</p>
       </div>
     
       <div *ngIf="screenplay.length > 0" class="flex flex-col gap-2 justify-center items-center">
-        <h3 class="md:text-xl lg:text-2xl font-bold">Guión</h3>
-        <p *ngFor="let data of screenplay"  >{{data.name}}</p>
+        <h3 class="md:text-xl lg:text-2xl font-bold underline-offset-2 underline">Guión</h3>
+        <p *ngFor="let sp of screenplay"  >{{sp.name}}</p>
       </div>
     
       <div *ngIf="music.length > 0" class="flex flex-col gap-2 justify-center items-center">
-        <h3 class="md:text-xl lg:text-2xl font-bold">Música</h3>
-        <p *ngFor="let data of music"  >{{data.name}}</p>
+        <h3 class="md:text-xl lg:text-2xl font-bold underline-offset-2 underline">Música</h3>
+        <p *ngFor="let mus of music"  >{{mus.name}}</p>
       </div>
     
       <div *ngIf="photograph.length > 0" class="flex flex-col gap-2 justify-center items-center">
-        <h3 class="md:text-xl lg:text-2xl font-bold">Fotografía</h3>
-        <p *ngFor="let data of photograph"  >{{data.name}}</p>
+        <h3 class="md:text-xl lg:text-2xl font-bold underline-offset-2 underline">Fotografía</h3>
+        <p *ngFor="let ph of photograph"  >{{ph.name}}</p>
       </div>
     
       <div *ngIf="companies.length > 0" class="flex flex-col gap-2 justify-center items-center">
-        <h3 class="md:text-xl lg:text-2xl font-bold">Compañías</h3>
-        <p *ngFor="let data of companies"  >{{data.name}}</p>
+        <h3 class="md:text-xl lg:text-2xl font-bold underline-offset-2 underline">Compañías</h3>
+        <p *ngFor="let company of companies"  >{{company.name}}</p>
       </div>
     </div>
 
