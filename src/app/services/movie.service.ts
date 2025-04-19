@@ -39,6 +39,8 @@ export class MovieService {
   // # Creditos de una pelicula,(Reparto....)
   // # https://api.themoviedb.org/3/movie/{movie_id}/credits?language=es-ES
 
+  // # Buscar peliculas por genero
+  // # https://api.themoviedb.org/3/discover/movie?api_key=TU_API_KEY&with_genres=ID_DEL_GENERO&language=es-ES
 
   private readonly http = inject(HttpClient);
 
@@ -83,7 +85,11 @@ export class MovieService {
     return this.http.get<any>(`${this.API_URL}/genre/movie/list?${this.LANGUAGE}`);
   }
 
-  getCredits(id:string): Observable<CreditsResponse> {
+  getCredits(id: string): Observable<CreditsResponse> {
     return this.http.get<CreditsResponse>(`${this.API_URL_MOVIE}/${id}/credits?${this.LANGUAGE}`);
+  }
+
+  getMoviesByGenre(genreId:number): Observable<ApiResponse>{
+    return this.http.get<ApiResponse>(`${this.API_URL}/discover/movie?with_genres=${genreId}&${this.LANGUAGE}`)
   }
 }
