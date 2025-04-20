@@ -1,28 +1,35 @@
 import { Mood } from "../types/mood.interface";
+import { GENRES } from "./genres";
 
 export const MOODS: Mood[] = [
   {
-    emoji: "🤣",
-    value: "Comedia"
+    src: "/images/moods/comedia.webp",
+    value: "Cómico",
+    genre: GENRES[3]
   },
   {
-    emoji: "😭",
-    value: "Drama"
+    src: "/images/moods/drama.webp",
+    value: "Dramático",
+    genre: GENRES[6]
   },
   {
-    emoji: "🥰",
-    value: "Romance"
+    src: "/images/moods/romance.webp",
+    value: "Enamorado",
+    genre: GENRES[13]
   },
   {
-    emoji: "😱",
-    value: "Terror"
+    src: "/images/moods/terror.webp",
+    value: "Aterrorizado",
+    genre: GENRES[10]
   },
   {
-    emoji: "🧐",
-    value: "Historia"
+    src: "/images/moods/cinefilo.webp",
+    value: "Cinéfilo",
+    genre: GENRES[9]
   },
   {
-    emoji: "❓",
-    value: "Trending"
+    src: "/images/moods/trending.webp",
+    value: "Indeciso",
+    genre: GENRES[Math.floor(Math.random()*20)]
   }
 ] as const

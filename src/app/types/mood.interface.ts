@@ -1,4 +1,7 @@
+import { Genre } from "./movie.interface";
+
 export interface Mood {
-  emoji: string,
-  value: string
+  src: string,
+  value: string,
+  genre: Genre
 }
