@@ -1,30 +1,32 @@
 <section *ngIf="movie && !error" id="movie-details" class="relative mt-15 w-full flex flex-col p-4 lg:py-2.5 lg:px-15">
 
   <!-- muestra la imagen que viene con el detalle de pelicula solo si no tiene backdrops -->
-  <img *ngIf="!imageList.length" 
-  [src]="getFullImageUrl(movie.backdrop_path)"
-  alt="imagen {{movie.title}}" 
-  class="max-h-[85vh] object-cover mask-fade-xy animate-fade-in">
+  <img *ngIf="!imageList.length" [src]="getFullImageUrl(movie.backdrop_path)" alt="imagen {{movie.title}}"
+    class="max-h-[85vh] object-cover mask-fade-xy animate-fade-in">
 
   <!-- backdrops, hacer un slider si la lista de imagenes tiene datos -->
-  <img *ngIf="imageList.length >= 1" [src]="getFullImageUrl(imageList[showIndex].file_path)" alt="imagen {{movie.title}}" 
-  class="max-h-[85vh] object-cover mask-fade-xy animate-fade-in "
-  [ngClass]="effectSlider">
+  <img *ngIf="imageList.length >= 1" [src]="getFullImageUrl(imageList[showIndex].file_path)"
+    alt="imagen {{movie.title}}" class="max-h-[85vh] object-cover mask-fade-xy animate-fade-in "
+    [ngClass]="effectSlider">
 
   <!-- botones de slider -->
-  <div *ngIf="imageList.length > 1" class="absolute z-10 inset-0 h-[40vh] sm:h-[55vh] md:h-[70vh] lg:h-[85vh] flex justify-between items-center px-4 lg:px-15">
-    <button (click)="previousImage()" class="h-7 md:h-11 lg:h-14 opacity-50 hover:opacity-90 hover:cursor-pointer hover:scale-110 transition-all">
-      <icon-svg name="previous" class="h-full"/>
+  <div *ngIf="imageList.length > 1"
+    class="absolute z-10 inset-0 h-[40vh] sm:h-[55vh] md:h-[70vh] lg:h-[85vh] flex justify-between items-center px-4 lg:px-15">
+    <button (click)="previousImage()"
+      class="h-7 md:h-11 lg:h-14 opacity-50 hover:opacity-90 hover:cursor-pointer hover:scale-110 transition-all">
+      <icon-svg name="previous" class="h-full" />
     </button>
-    <button (click)="nextImage()" class="h-7 md:h-11 lg:h-14 opacity-50 hover:opacity-90 hover:cursor-pointer hover:scale-110 transition-all">
-      <icon-svg name="next" class="h-full"/>
+    <button (click)="nextImage()"
+      class="h-7 md:h-11 lg:h-14 opacity-50 hover:opacity-90 hover:cursor-pointer hover:scale-110 transition-all">
+      <icon-svg name="next" class="h-full" />
     </button>
   </div>
 
   <!-- informacion de la pelicula -->
-  <div class="sm:absolute bottom-0 left-0 bg-black/55 py-5 px-5 md:px-10 lg:px-30 mask-fade-xy animate-fade-in animate-delay-400">
+  <div
+    class="sm:absolute bottom-0 left-0 bg-black/55 py-5 px-5 md:px-10 lg:px-30 mask-fade-xy animate-fade-in animate-delay-400">
     <!-- TO DO botones para agregar o quitar de favoritos -->
-    <div class="flex gap-4 items-center">
+    <div class="flex gap-4 items-center mb-1">
       <h1 class="text-xl md:text-2xl lg:text-5xl font-bold">{{movie.title}}</h1>
       <button class="btn-primary">
         Añadir
@@ -44,17 +46,26 @@
       <p *ngFor="let genre of movie?.genres">{{genre.name}}</p>
     </div>
   </div>
+
+  <!-- disponible en.... -->
+  <div *ngIf="movieProdivers.length" id="plataforms"
+    class="sm:absolute flex justify-center lg:px-15 gap-3 z-10 top-6 right-6">
+    <a *ngFor="let provider of movieProdivers" [href]="linkProviderTMDB" target="_blank"
+      class="size-7 md:size-10 rounded overflow-hidden hover:scale-105 transition-all shadow-white/70 shadow-xs hover:shadow-amber-200">
+      <img [src]="getFullImageUrl(provider.logo_path)" alt="logo {{ provider.provider_name }}"
+        class="object-cover h-full w-auto">
+    </a>
+  </div>
+
 </section>
 
-<!-- TO DO disponible en.... -->
- <section>
-  
- </section>
-
- <!-- seccion de video trailer -->
-<section *ngIf="videoList.length" id="movieTrailer" class="w-full px-7 lg:py-2.5 lg:px-15 flex flex-col gap-3 justify-center items-center animate-fade-in animate-delay-700 lg:my-3">
+<!-- seccion de video trailer -->
+<section *ngIf="videoList.length" id="movieTrailer"
+  class="w-full px-7 lg:py-2.5 lg:px-15 flex flex-col gap-3 justify-center items-center animate-fade-in animate-delay-700 lg:my-3">
   <h2 class="text-center text-xl md:text-2xl lg:text-4xl font-bold">Trailer</h2>
-  <ngx-lite-youtube class="w-full lg:w-[50%] h-auto border-2 border-[var(--color-text-secondary)] rounded overflow-hidden" [videoId]="videoList[0].key" thumbQuality="high" [videoTitle]="'🎞️ ' + movie?.title"></ngx-lite-youtube>
+  <ngx-lite-youtube
+    class="w-full lg:w-[50%] h-auto border-2 border-[var(--color-text-secondary)] rounded overflow-hidden"
+    [videoId]="videoList[0].key" thumbQuality="high" [videoTitle]="'🎞️ ' + movie?.title"></ngx-lite-youtube>
 </section>
 
 <!-- seccion de creditos... -->

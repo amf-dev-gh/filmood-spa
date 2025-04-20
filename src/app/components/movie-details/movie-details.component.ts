@@ -1,12 +1,13 @@
 import { Component, inject, OnInit } from '@angular/core';
 import { ActivatedRoute, RouterLink } from '@angular/router';
 import { MovieService } from '../../services/movie.service';
-import { Image, Movie, Person, ProductionCompany, Video } from '../../types/movie.interface';
+import { Image, Movie, Video } from '../../types/movie.interface';
 import { CommonModule } from '@angular/common';
 import { IconComponent } from "../icon/icon.component";
 import { NgxLiteYoutubeModule } from 'ngx-lite-video';
 import { CreditsResponse } from '../../types/apiResponse.interface';
 import { CreditsComponent } from "./credits/credits.component";
+import { Provider } from '../../types/prpovider.interface';
 
 @Component({
   selector: 'app-movie-details',
@@ -23,10 +24,13 @@ export class MovieDetailsComponent implements OnInit {
   imageList: Image[] = [];
   videoList: Video[] = [];
 
-  credits?:CreditsResponse;
+  credits?: CreditsResponse;
 
   showIndex: number = 0;
-  effectSlider:string = '';
+  effectSlider: string = '';
+
+  movieProdivers: Provider[] = [];
+  linkProviderTMDB: string = '';
 
   ngOnInit(): void {
     this.route.paramMap.subscribe(params => {
@@ -35,9 +39,9 @@ export class MovieDetailsComponent implements OnInit {
         this.getMovie(id);
       }
     })
-    // setInterval(() => {
-    //   this.nextImage();
-    // }, 4000);
+    setInterval(() => {
+      this.nextImage();
+    }, 4000);
   }
 
   getMovie(id: string) {
@@ -47,6 +51,7 @@ export class MovieDetailsComponent implements OnInit {
         this.getImageList(id);
         this.getVideoList(id);
         this.getCredits(id);
+        this.getMovieProviders(id);
       },
       error: err => {
         console.error('Error getting movie details', err);
@@ -87,23 +92,35 @@ export class MovieDetailsComponent implements OnInit {
 
   previousImage() {
     if (this.showIndex === 0) {
-      this.showIndex = this.imageList.length -1;
+      this.showIndex = this.imageList.length - 1;
     } else {
       this.showIndex -= 1;
     }
     this.effectSlider = 'animate-slide-in-left';
   }
 
-  getFullImageUrl(path:string):string{
+  getFullImageUrl(path: string): string {
     return `https://image.tmdb.org/t/p/original${path}`;
   }
 
-  getCredits(id:string){
+  getCredits(id: string) {
     this.movieService.getCredits(id).subscribe({
       next: data => {
         this.credits = data;
       },
-      error: err => console.error("Error getting credits",err)
+      error: err => console.error("Error getting credits", err)
+    })
+  }
+
+  getMovieProviders(id: string) {
+    this.movieService.getMovieProviders(id).subscribe({
+      next: response => {
+        if (response) {
+          this.linkProviderTMDB = response.results.ES.link;
+          this.movieProdivers = response.results.ES.flatrate;
+        }
+      },
+      error: err => console.error("Error getting providers", err)
     })
   }
 }
