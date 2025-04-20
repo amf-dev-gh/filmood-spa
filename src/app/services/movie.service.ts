@@ -42,6 +42,9 @@ export class MovieService {
   // # Buscar peliculas por genero
   // # https://api.themoviedb.org/3/discover/movie?api_key=TU_API_KEY&with_genres=ID_DEL_GENERO&language=es-ES
 
+  // # Proveedores de una pelicula especifica
+  // # https://api.themoviedb.org/3/movie/933260/watch/providers
+
   private readonly http = inject(HttpClient);
 
   private API_URL: string = 'https://api.themoviedb.org/3';
@@ -91,5 +94,9 @@ export class MovieService {
 
   getMoviesByGenre(genreId:number): Observable<ApiResponse>{
     return this.http.get<ApiResponse>(`${this.API_URL}/discover/movie?with_genres=${genreId}&${this.LANGUAGE}`)
+  }
+
+  getMovieProviders(id:string): Observable<any>{
+    return this.http.get<any>(`${this.API_URL_MOVIE}/${id}/watch/providers`);
   }
 }
