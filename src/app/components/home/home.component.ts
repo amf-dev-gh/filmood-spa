@@ -1,6 +1,6 @@
 import { Component, inject, OnInit } from '@angular/core';
 import { MovieService } from '../../services/movie.service';
-import { Genre, Movie } from '../../types/movie.interface';
+import { Movie } from '../../types/movie.interface';
 import { CommonModule } from '@angular/common';
 import { CardMovieComponent } from "../card-movie/card-movie.component";
 import { IconComponent } from "../icon/icon.component";
@@ -22,7 +22,14 @@ export class HomeComponent implements OnInit {
 
   moods: Mood[] = MOODS;
 
-  initMood: Mood = MOODS[5];
+  initMood: Mood = {
+    src: '',
+    value: '...',
+    genre: {
+      id: 0,
+      name: ''
+    }
+  }
 
   ngOnInit(): void {
     this.getActualMovies(1);
@@ -33,8 +40,7 @@ export class HomeComponent implements OnInit {
   getActualMovies(page: number) {
     this.movieService.getNowPlayingMovies(page).subscribe({
       next: response => {
-        // VALOR QUEMADO, hasta decidir..
-        this.actualMovies = response.results.slice(0, 8);
+        this.actualMovies = response.results.slice(8, 16);
       },
       error: err => console.error("Error loading actual movies", err)
     })
@@ -43,8 +49,7 @@ export class HomeComponent implements OnInit {
   getCommingMovies(page: number) {
     this.movieService.getUpCommingMovies(page).subscribe({
       next: response => {
-        // VALOR QUEMADO, hasta decidir..
-        this.commingMovies = response.results.slice(0, 8);
+        this.commingMovies = response.results.slice(8, 16);
       },
       error: err => console.error("Error loading comming movies", err)
     })
@@ -53,20 +58,18 @@ export class HomeComponent implements OnInit {
   getTrendingMovies(page: number) {
     this.movieService.getTrendingMovies(page).subscribe({
       next: response => {
-        // VALOR QUEMADO, hasta decidir..
-        this.moodMovies = response.results.slice(0, 8);
+        this.moodMovies = response.results.slice(8, 16);
       },
       error: err => console.error("Error loading trending movies", err)
     })
   }
 
-  // TO DO implementar en servicio metodo que busque pelicula por genero...
   setMood(mood: Mood) {
-    const genre = GENRES.find(g => g.name === mood.value);
-    if(!genre){
+    const genre = GENRES.find(g => g === mood.genre);
+    if (!genre) {
       this.getTrendingMovies(1);
     }
-    else{
+    else {
       this.movieService.getMoviesByGenre(genre.id).subscribe({
         next: response => {
           this.moodMovies = response.results.slice(0, 8);
