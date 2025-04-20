@@ -60,8 +60,8 @@ export class MovieService {
     return this.http.get<ApiResponse>(`${this.API_URL_MOVIE}/upcoming?${this.LANGUAGE}&page=${page}`);
   }
 
-  findMovieByTitle(title: string): Observable<ApiResponse> {
-    return this.http.get<ApiResponse>(`${this.API_URL_SEARCH}query=${title}&${this.LANGUAGE}`);
+  findMovieByTitle(title: string, page:number): Observable<ApiResponse> {
+    return this.http.get<ApiResponse>(`${this.API_URL_SEARCH}query=${title}&${this.LANGUAGE}&page=${page}`);
   }
 
   getDetailsMovie(id: string): Observable<Movie> {

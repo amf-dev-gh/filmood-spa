@@ -21,7 +21,19 @@
     </form>
   </div>
 
-  <!-- peliculas -->
-  <div></div>
+  <!-- peliculas encontradas -->
+  <div *ngIf="title !== ''" class="flex flex-col gap-4 mb-8">
+    <h1 class="text-2xl font-bold">Resultados para {{title}} >></h1>
+    <div class="grid gap-4 grid-cols-3 sm:grid-cols-5 md:grid-cols-8 lg:grid-cols-10">
+      <!-- card -->
+      <card-movie *ngFor="let movie of foundMovies" [movie]="movie" />
+    </div>
+
+    <div class="flex justify-center gap-4 items-center">
+      <button class="btn-secondary" (click)=" goToPage('prev')" *ngIf="actualPage > 1">Anterior</button>
+      <p>Página {{actualPage}} de {{totalPages}}</p>
+      <button class="btn-secondary" (click)=" goToPage('next')" *ngIf="actualPage < totalPages">Siguiente</button>
+    </div>
+  </div>
 
 </section>
