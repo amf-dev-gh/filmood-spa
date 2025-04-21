@@ -17,21 +17,17 @@ export class MoviesComponent {
   inputTitle: string = '';
   title: string = '';
 
-  totalPages:number = 0;
-  actualPage:number = 1;
+  totalPages: number = 0;
+  actualPage: number = 1;
 
   foundMovies: Movie[] = [];
+  notFoundMovies: boolean = false;
 
   searchMovie() {
-    if (this.inputTitle === '') {
-      // no puede ser vacio
+    if (this.inputTitle === '' || this.inputTitle.length < 4) {
       return;
     }
-    if (this.inputTitle.length < 4) {
-      // igrese al menos 3 letras
-      return
-    }
-
+    this.notFoundMovies = false;
     this.title = this.inputTitle;
     this.movieService.findMovieByTitle(this.inputTitle, this.actualPage).subscribe({
       next: response => {
@@ -40,16 +36,19 @@ export class MoviesComponent {
         this.actualPage = response.page;
         this.foundMovies = response.results;
         this.inputTitle = '';
+        if (!this.foundMovies.length) {
+          this.notFoundMovies = true;
+        }
 
       },
       error: err => console.error("Error searching movies", err)
     })
   }
 
-  goToPage(movement:string){
-    if(movement === 'next'){
+  goToPage(movement: string) {
+    if (movement === 'next') {
       this.actualPage += 1;
-    }else{
+    } else {
       this.actualPage -= 1;
     }
     this.movieService.findMovieByTitle(this.title, this.actualPage).subscribe({
