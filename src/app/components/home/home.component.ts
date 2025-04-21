@@ -70,7 +70,7 @@ export class HomeComponent implements OnInit {
       this.getTrendingMovies(1);
     }
     else {
-      this.movieService.getMoviesByGenre(genre.id).subscribe({
+      this.movieService.getMoviesByGenre(genre.id, 1).subscribe({
         next: response => {
           this.moodMovies = response.results.slice(0, 8);
         },
