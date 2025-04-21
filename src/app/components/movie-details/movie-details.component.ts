@@ -99,8 +99,11 @@ export class MovieDetailsComponent implements OnInit {
     this.effectSlider = 'animate-slide-in-left';
   }
 
-  getFullImageUrl(path: string): string {
-    return `https://image.tmdb.org/t/p/original${path}`;
+  getFullImageUrl(size:string, path: string): string {
+    if(path === null){
+      return '/images/default-backdrop.webp';
+    };
+    return `https://image.tmdb.org/t/p/${size}${path}`;
   }
 
   getCredits(id: string) {

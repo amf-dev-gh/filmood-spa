@@ -35,7 +35,10 @@ export class CreditsComponent implements OnInit {
     }
   }
 
-  getFullImageUrl(path:string):string{
-    return `https://image.tmdb.org/t/p/original${path}`;
+  getFullImageUrl(path: string): string {
+    if(path === null){
+      return '/images/default_actor.webp';
+    };
+    return `https://image.tmdb.org/t/p/h632${path}`;
   }
 }

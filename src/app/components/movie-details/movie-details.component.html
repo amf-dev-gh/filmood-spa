@@ -1,11 +1,11 @@
 <section *ngIf="movie && !error" id="movie-details" class="relative mt-15 w-full flex flex-col p-4 lg:py-2.5 lg:px-15">
 
   <!-- muestra la imagen que viene con el detalle de pelicula solo si no tiene backdrops -->
-  <img *ngIf="!imageList.length" [src]="getFullImageUrl(movie.backdrop_path)" alt="imagen {{movie.title}}"
+  <img *ngIf="!imageList.length" [src]="getFullImageUrl('original', movie.backdrop_path)" alt="imagen {{movie.title}}"
     class="max-h-[85vh] object-cover mask-fade-xy animate-fade-in">
 
   <!-- backdrops, hacer un slider si la lista de imagenes tiene datos -->
-  <img *ngIf="imageList.length >= 1" [src]="getFullImageUrl(imageList[showIndex].file_path)"
+  <img *ngIf="imageList.length >= 1" [src]="getFullImageUrl('original', imageList[showIndex].file_path)"
     alt="imagen {{movie.title}}" class="max-h-[85vh] object-cover mask-fade-xy animate-fade-in "
     [ngClass]="effectSlider">
 
@@ -52,7 +52,7 @@
     class="sm:absolute flex justify-center lg:px-15 gap-3 z-10 top-6 right-6">
     <a *ngFor="let provider of movieProdivers" [href]="linkProviderTMDB" target="_blank"
       class="size-7 md:size-10 rounded overflow-hidden hover:scale-105 transition-all shadow-white/70 shadow-xs hover:shadow-amber-200">
-      <img [src]="getFullImageUrl(provider.logo_path)" alt="logo {{ provider.provider_name }}"
+      <img [src]="getFullImageUrl('w92', provider.logo_path)" alt="logo {{ provider.provider_name }}"
         class="object-cover h-full w-auto">
     </a>
   </div>
