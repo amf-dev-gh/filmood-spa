@@ -1,8 +1,9 @@
-import { inject, Injectable } from '@angular/core';
+import { inject, Injectable, signal } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { ApiResponse, CreditsResponse } from '../types/apiResponse.interface';
-import { Genre, Movie } from '../types/movie.interface';
+import { Movie } from '../types/movie.interface';
+import { LastSearch } from '../types/lastSearch.interface';
 
 @Injectable({
   providedIn: 'root'
@@ -52,6 +53,16 @@ export class MovieService {
   private API_URL_MOVIE: string = `${this.API_URL}/movie`;
   private API_URL_SEARCH: string = `${this.API_URL}/search/movie?`;
 
+  $lastFound = signal<LastSearch>({
+    selectedGenre: '',
+    inputTitle: '',
+    title: '',
+    totalPages: 0,
+    actualPage: 1,
+    foundMovies: [],
+    notFoundMovies: false
+  });
+
   getNowPlayingMovies(page: number): Observable<ApiResponse> {
     return this.http.get<ApiResponse>(`${this.API_URL_MOVIE}/now_playing?${this.LANGUAGE}&page=${page}`);
   }
@@ -92,8 +103,8 @@ export class MovieService {
     return this.http.get<CreditsResponse>(`${this.API_URL_MOVIE}/${id}/credits?${this.LANGUAGE}`);
   }
 
-  getMoviesByGenre(genreId:number): Observable<ApiResponse>{
-    return this.http.get<ApiResponse>(`${this.API_URL}/discover/movie?with_genres=${genreId}&${this.LANGUAGE}`)
+  getMoviesByGenre(genreId:number, page:number): Observable<ApiResponse>{
+    return this.http.get<ApiResponse>(`${this.API_URL}/discover/movie?with_genres=${genreId}&${this.LANGUAGE}&page=${page}`)
   }
 
   getMovieProviders(id:string): Observable<any>{
