@@ -2,11 +2,12 @@
 
   <!-- buscador -->
   <h1 class="text-center text-3xl font-bold mt-5">Busca la pelicula por su nombre o Género</h1>
-  <div class="flex justify-center my-5 text-[var(--color-base-petroleo)] gap-3">
+  <div class="flex justify-center align-center flex-col sm:flex-row my-5 text-[var(--color-base-petroleo)] gap-3">
+
     <form (submit)="searchMovie()" class="relative">
       <input 
       type="text" 
-      class="bg-[var(--color-text)]/80 rounded-3xl w-110 h-10 py-2 ps-5 pe-8 text-[var(--color-base-petroleo)]"
+      class="bg-[var(--color-text)]/80 rounded-3xl w-full sm:w-110 h-10 py-2 ps-5 pe-8 text-[var(--color-base-petroleo)]"
       placeholder="Ingresa el nombre de la película"
       name="inputTitle" 
       [(ngModel)]="inputTitle"
@@ -20,7 +21,7 @@
     <select name="inputSelect" id="inputSelect"
       [(ngModel)]="selectedGenre"
       (ngModelChange)="findByGenre($event)"
-      class="bg-[var(--color-text)]/80 rounded-3xl w-60 h-10 py-2 px-4 text-[var(--color-base-petroleo)]">
+      class="bg-[var(--color-text)]/80 rounded-3xl w-full sm:w-60 h-10 py-2 px-4 text-[var(--color-base-petroleo)]">
       <option value="" disabled selected>- Género -</option>
       <option *ngFor="let genre of genres" [value]="genre.id">{{ genre.name }}</option>
     </select>
