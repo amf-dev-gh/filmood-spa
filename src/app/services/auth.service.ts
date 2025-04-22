@@ -1,4 +1,4 @@
-import { inject, Injectable } from '@angular/core';
+import { inject, Injectable, signal } from '@angular/core';
 import { LoginCredentials, LoginResponse, RegisterResponse, RegisterUser } from '../types/auth.interface';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
@@ -15,6 +15,7 @@ export class AuthService {
   private TOKEN: string = 'USER_TOKEN';
   private EXPIRATION: string = 'EXPIRATION_TIME';
 
+  $isAuthenticated = signal<boolean>(false);
 
   singUp(newUser: RegisterUser): Observable<RegisterResponse> {
     return this.http.post<RegisterResponse>(`${this.API_URL}/singup`, newUser);
@@ -25,7 +26,8 @@ export class AuthService {
   }
 
   logout() {
-    localStorage.clear();
+    sessionStorage.clear();
+    this.$isAuthenticated.set(false);
   }
 
   setUserStorage(response: LoginResponse) {
@@ -33,6 +35,7 @@ export class AuthService {
     sessionStorage.setItem(this.USER, response.username);
     sessionStorage.setItem(this.EXPIRATION, response.expirationTime.toString());
     sessionStorage.setItem(this.ROLE, response.role);
+    this.$isAuthenticated.set(true);
   }
 
   getToken(): string | null {

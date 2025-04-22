@@ -16,12 +16,13 @@
     <div class="flex flex-col gap-8 text-2xl items-center py-2 transition-all animate-fade-in" [ngClass]="showMenu ? '':'hidden'">
       <a routerLink="/home" class=" hover:underline" (click)="closeMenu()">Inicio</a>
       <a routerLink="/movies" class=" hover:underline" (click)="closeMenu()">Peliculas</a>
-      <a routerLink="/moods" class=" hover:underline" (click)="closeMenu()">Mis moods</a>
-      <a routerLink="/about" class=" hover:underline" (click)="closeMenu()">Sobre la web</a>
-      <a routerLink="/login" class=" hover:underline" (click)="closeMenu()">Iniciar sesión</a>
+      <a *ngIf="isAuthenticated()" routerLink="/moods" class=" hover:underline" (click)="closeMenu()">Mis moods</a>
+      <a routerL1ink="/about" class=" hover:underline" (click)="closeMenu()">Sobre la web</a>
+      <a *ngIf="!isAuthenticated()" routerLink="/login" class=" hover:underline" (click)="closeMenu()">Iniciar sesión</a>
+      <a *ngIf="isAuthenticated()" type="button" (click)="logout()" class=" hover:underline" (click)="closeMenu()">Cerrar sesión</a>
     </div>
 
-    <ul class="hidden md:flex md:gap-4">
+    <ul class="hidden md:flex md:gap-4 me-auto">
       <li>
         <a routerLink="/home"
           class="hover:text-[var(--color-base-turquesa)] hover:underline underline-offset-2 hover:cursor-pointer">Inicio</a>
@@ -30,7 +31,7 @@
         <a routerLink="/movies"
           class="hover:text-[var(--color-base-turquesa)] hover:underline underline-offset-2 hover:cursor-pointer">Peliculas</a>
       </li>
-      <li>
+      <li  *ngIf="isAuthenticated()">
         <a routerLink="/moods"
           class="hover:text-[var(--color-base-turquesa)] hover:underline underline-offset-2 hover:cursor-pointer">Mis
           moods</a>
@@ -42,7 +43,9 @@
       </li>
     </ul>
 
-    <a routerLink="/login" class="btn-secondary hidden md:inline">Iniciar Sesión</a>
+    <a *ngIf="!isAuthenticated()" routerLink="/login" class="btn-secondary hidden md:inline">Iniciar Sesión</a>
+
+    <a *ngIf="isAuthenticated()" type="button" (click)="logout()" class="btn-secondary hidden md:inline">Cerrar Sesión</a>
 
   </nav>
 </header>
