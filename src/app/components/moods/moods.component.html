@@ -1,14 +1,25 @@
-<section id="user-mods" class="mt-15 w-full h-[85svh] gap-3 p-4 lg:py-2.5 lg:px-15">
+<section id="user-mods" class="mt-15 w-full h-[85svh] gap-3 p-2 lg:py-2.5 lg:px-15">
 
-  <div class="[grid-template:sidebar] bg-gray-400/90 rounded p-4 text-[var(--color-base-azul)] flex flex-col gap-4">
+  <div
+    class="[grid-template:sidebar] bg-gray-400/90 rounded p-4 text-[var(--color-base-azul)] flex flex-col gap-4  overflow-y-auto">
     <h1 class="text-3xl font-bold">Mis Moods</h1>
     <div class="flex flex-col gap-2">
-      <button *ngFor="let mood of userMoods" (click)="selectMood(mood)" class="py-2 bg-white/80 hover:bg-white/90 hover:cursor-pointer rounded">{{mood.name}}</button>
-      <button class="py-2 bg-white/80 hover:bg-white/90 hover:cursor-pointer rounded" (click)="createMood()">+ Nuevo Mood</button>
+      <button *ngFor="let mood of userMoods" (click)="selectMood(mood)"
+        class="py-2 bg-white/80 hover:bg-white/90 hover:cursor-pointer rounded">{{mood.name}}</button>
+      <button *ngIf="!showForm" class="py-2 bg-white/80 hover:bg-white/90 hover:cursor-pointer rounded"
+        (click)="newMood()">+ Nuevo Mood</button>
+      <input *ngIf="showForm" type="text" class="py-2 bg-white/80 hover:bg-white/90 rounded p-2 text-center mt-3"
+        placeholder="Ingrese el nombre" [(ngModel)]="inputName">
+      <button *ngIf="showForm"
+        class="py-2 bg-[var(--color-base-azul)]/75 hover:bg-[var(--color-base-azul)]/90 hover:cursor-pointer rounded text-[var(--color-text)]"
+        (click)="createMood()">Crear</button>
+      <button *ngIf="showForm"
+        class="py-2 bg-red-500/75 hover:bg-red-500/90 hover:cursor-pointer rounded text-[var(--color-text)]"
+        (click)="closeNewMood()">Cancelar</button>
     </div>
   </div>
-  
-  <div class="[grid-template:content] bg-gray-400/90 rounded p-4 text-[var(--color-base-azul)] overflow-y-auto">
+
+  <div class="[grid-template:content] bg-gray-400/90 rounded p-4 text-[var(--color-base-azul)] sm:overflow-y-auto">
     <!-- caso de que el mood no este seleccionado -->
     <h2 *ngIf="!selectedMood" class="text-2xl font-bold">Ningun Mood seleccionado...</h2>
 
@@ -16,11 +27,15 @@
     <div *ngIf="selectedMood" class="flex flex-col gap-2">
 
       <div class="flex items-center justify-between">
-        <h2 class="text-2xl font-bold">{{selectedMood.name}}</h2>
+        <div class="flex items-center gap-3">
+          <h2 class="text-2xl font-bold">{{selectedMood.name}}</h2>
+          <button class="text-2xl text-red-900/80 hover:text-red-900/100 hover:cursor-pointer" title="Eliminar Mood"
+            (click)="deleteMood(selectedMood.id)"><i class="bi bi-trash"></i></button>
+        </div>
         <button (click)="closeMood()" class="text-2xl hover:cursor-pointer"><i class="bi bi-x-lg"></i></button>
       </div>
 
-      <div class="grid grid-cols-6 gap-4">
+      <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-7 gap-4">
         <card-movie *ngFor="let movie of selectedMood.movies" [movie]="movie" />
       </div>
 
