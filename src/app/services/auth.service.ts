@@ -43,4 +43,8 @@ export class AuthService {
     return token ? token : null;
   }
 
+  getUsername(){
+    return sessionStorage.getItem(this.USER) || '';
+  }
+
 }
