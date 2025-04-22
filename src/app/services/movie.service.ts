@@ -1,7 +1,7 @@
 import { inject, Injectable, signal } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { ApiResponse, CreditsResponse } from '../types/apiResponse.interface';
+import { TMDBResponse, CreditsResponse } from '../types/tmdbResponse.interface';
 import { Movie } from '../types/movie.interface';
 import { LastSearch } from '../types/lastSearch.interface';
 
@@ -63,16 +63,16 @@ export class MovieService {
     notFoundMovies: false
   });
 
-  getNowPlayingMovies(page: number): Observable<ApiResponse> {
-    return this.http.get<ApiResponse>(`${this.API_URL_MOVIE}/now_playing?${this.LANGUAGE}&page=${page}`);
+  getNowPlayingMovies(page: number): Observable<TMDBResponse> {
+    return this.http.get<TMDBResponse>(`${this.API_URL_MOVIE}/now_playing?${this.LANGUAGE}&page=${page}`);
   }
 
-  getUpCommingMovies(page: number): Observable<ApiResponse> {
-    return this.http.get<ApiResponse>(`${this.API_URL_MOVIE}/upcoming?${this.LANGUAGE}&page=${page}`);
+  getUpCommingMovies(page: number): Observable<TMDBResponse> {
+    return this.http.get<TMDBResponse>(`${this.API_URL_MOVIE}/upcoming?${this.LANGUAGE}&page=${page}`);
   }
 
-  findMovieByTitle(title: string, page:number): Observable<ApiResponse> {
-    return this.http.get<ApiResponse>(`${this.API_URL_SEARCH}query=${title}&${this.LANGUAGE}&page=${page}`);
+  findMovieByTitle(title: string, page: number): Observable<TMDBResponse> {
+    return this.http.get<TMDBResponse>(`${this.API_URL_SEARCH}query=${title}&${this.LANGUAGE}&page=${page}`);
   }
 
   getDetailsMovie(id: string): Observable<Movie> {
@@ -87,12 +87,12 @@ export class MovieService {
     return this.http.get<any>(`${this.API_URL_MOVIE}/${id}/images?include_image_language=null`);
   }
 
-  getPopularMovies(page: number): Observable<ApiResponse> {
-    return this.http.get<ApiResponse>(`${this.API_URL_MOVIE}/popular?${this.LANGUAGE}&page=${page}`);
+  getPopularMovies(page: number): Observable<TMDBResponse> {
+    return this.http.get<TMDBResponse>(`${this.API_URL_MOVIE}/popular?${this.LANGUAGE}&page=${page}`);
   }
 
-  getTrendingMovies(page: number): Observable<ApiResponse> {
-    return this.http.get<ApiResponse>(`${this.API_URL}/trending/movie/week?${this.LANGUAGE}&page=${page}`);
+  getTrendingMovies(page: number): Observable<TMDBResponse> {
+    return this.http.get<TMDBResponse>(`${this.API_URL}/trending/movie/week?${this.LANGUAGE}&page=${page}`);
   }
 
   getGenres(): Observable<any> {
@@ -103,11 +103,11 @@ export class MovieService {
     return this.http.get<CreditsResponse>(`${this.API_URL_MOVIE}/${id}/credits?${this.LANGUAGE}`);
   }
 
-  getMoviesByGenre(genreId:number, page:number): Observable<ApiResponse>{
-    return this.http.get<ApiResponse>(`${this.API_URL}/discover/movie?with_genres=${genreId}&${this.LANGUAGE}&page=${page}`)
+  getMoviesByGenre(genreId: number, page: number): Observable<TMDBResponse> {
+    return this.http.get<TMDBResponse>(`${this.API_URL}/discover/movie?with_genres=${genreId}&${this.LANGUAGE}&page=${page}`)
   }
 
-  getMovieProviders(id:string): Observable<any>{
+  getMovieProviders(id: string): Observable<any> {
     return this.http.get<any>(`${this.API_URL_MOVIE}/${id}/watch/providers`);
   }
 }
