@@ -1,7 +1,7 @@
 import { CommonModule } from '@angular/common';
-import { Component, Input, input, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { Movie, Person, ProductionCompany } from '../../../types/movie.interface';
-import { CreditsResponse } from '../../../types/apiResponse.interface';
+import { CreditsResponse } from '../../../types/tmdbResponse.interface';
 
 @Component({
   selector: 'app-credits',
@@ -10,8 +10,8 @@ import { CreditsResponse } from '../../../types/apiResponse.interface';
 })
 export class CreditsComponent implements OnInit {
 
-  @Input()movie?:Movie;
-  @Input()credits?:CreditsResponse;
+  @Input() movie?: Movie;
+  @Input() credits?: CreditsResponse;
 
   direction: Person[] = [];
   screenplay: Person[] = []; // Guionista
@@ -26,17 +26,17 @@ export class CreditsComponent implements OnInit {
 
   getInfoCredits() {
     if (this.movie && this.credits) {
-    this.direction = this.credits.crew.filter(c => c.job.toLowerCase() === "director");
-    this.screenplay = this.credits.crew.filter(c => c.job.toLowerCase() === "screenplay");
-    this.cast = this.credits.cast.filter(c => c.known_for_department.toLowerCase() === "acting");
-    this.music = this.credits.crew.filter(c => c.job.toLowerCase() === "original music composer");
-    this.photograph = this.credits.crew.filter(c => c.job.toLowerCase() === "director of hotography");
+      this.direction = this.credits.crew.filter(c => c.job.toLowerCase() === "director");
+      this.screenplay = this.credits.crew.filter(c => c.job.toLowerCase() === "screenplay");
+      this.cast = this.credits.cast.filter(c => c.known_for_department.toLowerCase() === "acting");
+      this.music = this.credits.crew.filter(c => c.job.toLowerCase() === "original music composer");
+      this.photograph = this.credits.crew.filter(c => c.job.toLowerCase() === "director of hotography");
       this.companies = this.movie.production_companies;
     }
   }
 
   getFullImageUrl(path: string): string {
-    if(path === null){
+    if (path === null) {
       return '/images/default_actor.webp';
     };
     return `https://image.tmdb.org/t/p/h632${path}`;

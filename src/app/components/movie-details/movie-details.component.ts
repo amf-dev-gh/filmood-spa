@@ -5,7 +5,7 @@ import { Image, Movie, Video } from '../../types/movie.interface';
 import { CommonModule } from '@angular/common';
 import { IconComponent } from "../icon/icon.component";
 import { NgxLiteYoutubeModule } from 'ngx-lite-video';
-import { CreditsResponse } from '../../types/apiResponse.interface';
+import { CreditsResponse } from '../../types/tmdbResponse.interface';
 import { CreditsComponent } from "./credits/credits.component";
 import { Provider } from '../../types/prpovider.interface';
 
@@ -99,8 +99,8 @@ export class MovieDetailsComponent implements OnInit {
     this.effectSlider = 'animate-slide-in-left';
   }
 
-  getFullImageUrl(size:string, path: string): string {
-    if(path === null){
+  getFullImageUrl(size: string, path: string): string {
+    if (path === null) {
       return '/images/default-backdrop.webp';
     };
     return `https://image.tmdb.org/t/p/${size}${path}`;
