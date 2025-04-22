@@ -1,6 +1,6 @@
 import { Movie, Person } from "./movie.interface";
 
-export interface ApiResponse {
+export interface TMDBResponse {
   results: Movie[],
   total_pages: number,
   page: number
