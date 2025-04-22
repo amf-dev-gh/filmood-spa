@@ -1,0 +1,6 @@
+#user-mods {
+  display: grid;
+  grid-template-areas: "sidebar content";
+  grid-template-columns: 300px 1fr;
+  grid-template-rows: 1fr;
+}
