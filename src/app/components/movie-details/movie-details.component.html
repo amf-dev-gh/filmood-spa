@@ -2,12 +2,16 @@
 
   <!-- muestra la imagen que viene con el detalle de pelicula solo si no tiene backdrops -->
   <img *ngIf="!imageList.length" [src]="getFullImageUrl('original', movie.backdrop_path)" alt="imagen {{movie.title}}"
-    class="max-h-[85vh] object-cover mask-fade-xy animate-fade-in">
+    class="max-h-[85vh] object-cover mask-fade-xy animate-fade-in" (load)="onImageLoad()" [class.hidden]="!imageLoaded">
 
   <!-- backdrops, hacer un slider si la lista de imagenes tiene datos -->
   <img *ngIf="imageList.length >= 1" [src]="getFullImageUrl('original', imageList[showIndex].file_path)"
-    alt="imagen {{movie.title}}" class="max-h-[85vh] object-cover mask-fade-xy animate-fade-in "
-    [ngClass]="effectSlider">
+    alt="imagen {{movie.title}}" class="max-h-[85vh] object-cover mask-fade-xy animate-fade-in" (load)="onImageLoad()" [class.hidden]="!imageLoaded">
+
+  <!-- Spinner -->
+  <div *ngIf="!imageLoaded" class="flex items-center justify-center w-full h-[80vh]">
+    <span class="loader"></span>
+  </div>
 
   <!-- botones de slider -->
   <div *ngIf="imageList.length > 1"

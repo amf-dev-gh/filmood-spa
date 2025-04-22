@@ -12,11 +12,17 @@ export class CardMovieComponent {
 
   @Input()movie?:Movie;
 
+  imageLoaded:boolean = false;
+
   getFullImageUrl(size:string, path: string): string {
     if(path === null){
       return '/images/default_poster.webp';
     };
     return `https://image.tmdb.org/t/p/${size}${path}`;
+  }
+
+  onImageLoad() {
+    this.imageLoaded = true;
   }
 
 }

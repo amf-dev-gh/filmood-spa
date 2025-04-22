@@ -20,6 +20,8 @@ export class CreditsComponent implements OnInit {
   photograph: Person[] = [];
   companies: ProductionCompany[] = [];
 
+  imageLoaded:boolean = false;
+
   ngOnInit(): void {
     this.getInfoCredits();
   }
@@ -40,5 +42,9 @@ export class CreditsComponent implements OnInit {
       return '/images/default_actor.webp';
     };
     return `https://image.tmdb.org/t/p/h632${path}`;
+  }
+
+  onImageLoad() {
+    this.imageLoaded = true;
   }
 }

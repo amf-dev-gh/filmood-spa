@@ -4,9 +4,14 @@
   <h3 *ngIf="cast.length" class="md:text-xl lg:text-2xl font-bold underline-offset-2 underline">Reparto</h3>
   <div *ngIf="cast.length" class="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-6 lg:grid-cols-8 xl:grid-cols-10 gap-2 overflow-hidden">
     <div *ngFor="let actor of cast.slice(0,10)" class="relative rounded w-full border-2 border-[var(--color-text-secondary)] hover:border-[var(--color-text)] transition-colors">
-      <img [src]="getFullImageUrl(actor.profile_path)" alt="imagen perfil {{actor.name}}" class="rounded-xs w-full h-auto">
+      <img [src]="getFullImageUrl(actor.profile_path)" alt="imagen perfil {{actor.name}}" class="rounded-xs w-full h-auto" (load)="onImageLoad()"
+      [class.hidden]="!imageLoaded">
       <p class="absolute bottom-0 w-full p-1 z-10 text-sm md:text-[12px] rounded">{{actor.name}}<br>({{actor.character}})</p>
       <span class="w-full h-full absolute bg-black/80 inset-0 mask-fade-top rounded"></span>
+      <!-- Spinner -->
+      <div *ngIf="!imageLoaded" class="flex items-center justify-center w-30 h-45">
+        <span class="loader"></span>
+      </div>
     </div>
   </div>
 

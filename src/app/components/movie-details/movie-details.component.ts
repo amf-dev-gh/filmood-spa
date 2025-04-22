@@ -27,7 +27,7 @@ export class MovieDetailsComponent implements OnInit {
   credits?: CreditsResponse;
 
   showIndex: number = 0;
-  effectSlider: string = '';
+  imageLoaded:boolean = false;
 
   movieProdivers: Provider[] = [];
   linkProviderTMDB: string = '';
@@ -87,7 +87,6 @@ export class MovieDetailsComponent implements OnInit {
     } else {
       this.showIndex = 0;
     }
-    this.effectSlider = 'animate-slide-in-right';
   }
 
   previousImage() {
@@ -96,7 +95,6 @@ export class MovieDetailsComponent implements OnInit {
     } else {
       this.showIndex -= 1;
     }
-    this.effectSlider = 'animate-slide-in-left';
   }
 
   getFullImageUrl(size: string, path: string): string {
@@ -125,5 +123,9 @@ export class MovieDetailsComponent implements OnInit {
       },
       error: err => console.error("Error getting providers", err)
     })
+  }
+
+  onImageLoad() {
+    this.imageLoaded = true;
   }
 }
