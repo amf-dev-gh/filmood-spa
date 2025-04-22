@@ -15,7 +15,7 @@ export class AuthService {
   private TOKEN: string = 'USER_TOKEN';
   private EXPIRATION: string = 'EXPIRATION_TIME';
 
-  $isAuthenticated = signal<boolean>(false);
+  $isAuthenticated = signal<boolean>(this.getToken() ? true:false);
 
   singUp(newUser: RegisterUser): Observable<RegisterResponse> {
     return this.http.post<RegisterResponse>(`${this.API_URL}/singup`, newUser);
@@ -39,7 +39,7 @@ export class AuthService {
   }
 
   getToken(): string | null {
-    const token = localStorage.getItem(this.TOKEN);
+    const token = sessionStorage.getItem(this.TOKEN);
     return token ? token : null;
   }
 
