@@ -1,0 +1,63 @@
+<section id="login"
+  class="relative mt-15 w-full h-[70vh] flex flex-col justify-center items-center p-4 lg:py-2.5 lg:px-15">
+
+  <div class="flex flex-col gap-3 items-center w-75">
+
+    <icon-svg name="fm-logo" class="h-30" />
+
+    <form (submit)="singUp()" [formGroup]="formSingup" class="flex flex-col gap-3 items-center border-b py-3">
+
+      <input type="text" formControlName="fullName" id="fullName"
+        class="w-75 h-8 bg-white/80 rounded-3xl text-[var(--color-base-azul)] py-2 px-4 text-center"
+        placeholder="Nombre completo">
+      <div
+        *ngIf="formSingup.get('fullName')?.invalid && (formSingup.get('fullName')?.touched || formSingup.get('fullName')?.dirty)"
+        class="text-center text-[12px] text-red-400">
+        <span *ngIf="formSingup.get('fullName')?.errors?.['required']">El nombre es obligatorio.</span>
+        <span *ngIf="formSingup.get('fullName')?.errors?.['pattern']">
+          Debe contener al menos un nombre y un apellido.
+        </span>
+      </div>
+
+      <input type="text" formControlName="username" id="username"
+        class="w-75 h-8 bg-white/80 rounded-3xl text-[var(--color-base-azul)] py-2 px-4 text-center"
+        placeholder="Usuario">
+      <div
+        *ngIf="formSingup.get('username')?.invalid && (formSingup.get('username')?.touched || formSingup.get('username')?.dirty)"
+        class="text-center text-[12px] text-red-400">
+        <span *ngIf="formSingup.get('username')?.errors?.['required']">El usuario es obligatorio.</span>
+        <span *ngIf="formSingup.get('username')?.errors?.['pattern']">
+          Solo se permiten letras y números.
+        </span>
+      </div>
+
+      <input type="password" formControlName="password" id="password"
+        class="w-75 h-8 bg-white/80 rounded-3xl text-[var(--color-base-azul)] py-2 px-4 text-center"
+        placeholder="Contraseña" autocomplete="new-password">
+      <div
+        *ngIf="formSingup.get('password')?.invalid && (formSingup.get('password')?.touched || formSingup.get('password')?.dirty)"
+        class="text-center text-[12px] text-red-400">
+        <span *ngIf="formSingup.get('password')?.errors?.['required']">La contraseña es obligatoria.</span>
+        <span *ngIf="formSingup.get('password')?.errors?.['pattern']">
+          Debe tener al menos 8 caracteres, incluyendo mayúsculas y minúsculas.
+        </span>
+      </div>
+
+      <div *ngIf="errorMsg" class="text-center text-[12px] text-red-400">{{errorMsg}}</div>
+
+      <div class="flex gap-3">
+        <button type="submit" class="btn-primary w-full">Crear cuenta</button>
+      </div>
+
+    </form>
+
+    <!-- TO DO... -->
+    <a href="http://google.com" target="_blank"
+      class="text-xl bg-white/80 hover:bg-white/90 w-full py-1 rounded-3xl text-[var(--color-base-azul)] flex items-center gap-2 justify-center">
+      <i class="bi bi-google"></i>
+      <span class="text-sm">Registrarse con Google</span>
+    </a>
+
+  </div>
+
+</section>
