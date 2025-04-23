@@ -2,7 +2,7 @@
   <img [src]="getFullImageUrl('w342',movie.poster_path)" alt="imagen {{movie.title}}" class="aspect-[200/300] w-full h-auto rounded" (load)="onImageLoad()"
     [class.hidden]="!imageLoaded">
     <!-- Spinner -->
-    <div *ngIf="!imageLoaded" class="flex items-center justify-center w-30 h-45">
+    <div *ngIf="!imageLoaded" class="flex items-center justify-center w-30 h-50">
       <span class="loader"></span>
     </div>
 </div>
