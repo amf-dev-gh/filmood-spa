@@ -49,3 +49,9 @@ export interface ProductionCompany {
   logo_path: string,
   name: string
 }
+
+export interface MovieDTO {
+  id: number,
+  title: string,
+  poster_path: string
+}
