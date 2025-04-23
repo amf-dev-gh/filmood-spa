@@ -6,6 +6,7 @@ import { MoodsComponent } from './components/moods/moods.component';
 import { AboutComponent } from './components/about/about.component';
 import { LoginComponent } from './components/login/login.component';
 import { SingupComponent } from './components/singup/singup.component';
+import { LoginGuard } from './guards/login.guard';
 
 export const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -15,6 +16,6 @@ export const routes: Routes = [
   { path: 'about', component: AboutComponent },
   { path: 'movies', component: MoviesComponent },
   { path: 'movie/:id', component: MovieDetailsComponent },
-  { path: 'moods', component: MoodsComponent },
+  { path: 'moods', component: MoodsComponent, canActivate: [LoginGuard] },
   { path: '**', component: HomeComponent }
 ];
