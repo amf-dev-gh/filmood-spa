@@ -5,7 +5,7 @@
     <h1 class="text-3xl font-bold">Mis Moods</h1>
     <div class="flex flex-col gap-2">
       <button *ngFor="let mood of userMoods" (click)="selectMood(mood)"
-        class="py-2 bg-white/80 hover:bg-white/90 hover:cursor-pointer rounded">{{mood.name}}</button>
+        class="py-2 hover:cursor-pointer rounded shadow" [ngClass]="mood === selectedMood ? 'bg-[var(--color-base-turquesa)] border-2 border-[#21867A] hover:bg-[#21867A]':'bg-white/80 hover:bg-white/90'">{{mood.name}}</button>
       <button *ngIf="!showForm" class="py-2 bg-white/80 hover:bg-white/90 hover:cursor-pointer rounded"
         (click)="newMood()">+ Nuevo Mood</button>
       <input *ngIf="showForm" type="text" class="py-2 bg-white/80 hover:bg-white/90 rounded p-2 text-center mt-3"
@@ -36,7 +36,7 @@
       </div>
 
       <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-7 gap-4">
-        <card-movie *ngFor="let movie of selectedMood.movies" [movie]="movie" />
+        <card-movie *ngFor="let movie of selectedMood.movies" [movie]="movie"/>
       </div>
 
     </div>
