@@ -32,15 +32,15 @@ export class HomeComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.getTrendingMovies(1);
     this.getActualMovies(1);
-    this.getCommingMovies(2);
-    this.getTrendingMovies(3);
+    this.getCommingMovies(1);
   }
 
   getActualMovies(page: number) {
     this.movieService.getNowPlayingMovies(page).subscribe({
       next: response => {
-        this.actualMovies = response.results.slice(8, 16);
+        this.actualMovies = response.results.slice(0, 8);
       },
       error: err => console.error("Error loading actual movies", err)
     })
@@ -49,7 +49,7 @@ export class HomeComponent implements OnInit {
   getCommingMovies(page: number) {
     this.movieService.getUpCommingMovies(page).subscribe({
       next: response => {
-        this.commingMovies = response.results.slice(8, 16);
+        this.commingMovies = response.results.slice(0, 8);
       },
       error: err => console.error("Error loading comming movies", err)
     })
@@ -58,7 +58,7 @@ export class HomeComponent implements OnInit {
   getTrendingMovies(page: number) {
     this.movieService.getTrendingMovies(page).subscribe({
       next: response => {
-        this.moodMovies = response.results.slice(8, 16);
+        this.moodMovies = response.results.slice(0, 8);
       },
       error: err => console.error("Error loading trending movies", err)
     })
