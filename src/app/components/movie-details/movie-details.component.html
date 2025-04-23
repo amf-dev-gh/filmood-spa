@@ -28,16 +28,11 @@
 
   <!-- informacion de la pelicula -->
   <div
-    class="sm:absolute bottom-0 left-0 bg-black/55 py-5 px-5 md:px-10 lg:px-30 mask-fade-xy animate-fade-in animate-delay-400">
+    class="sm:absolute bottom-0 left-0 bg-black/55 py-5 px-5 md:px-10 lg:px-30 mask-fade-xy animate-fade-in animate-delay-400 z-20">
     <!-- TO DO botones para agregar o quitar de favoritos -->
     <div class="flex gap-4 items-center mb-1">
       <h1 class="text-xl md:text-2xl lg:text-5xl font-bold">{{movie.title}}</h1>
-      <button class="btn-primary">
-        Añadir
-      </button>
-      <button class="btn-secondary">
-        Quitar
-      </button>
+      <button class="text-xl md:text-2xl hover:cursor-pointer hover:text-[var(--color-base-mostaza)]" (click)="openCloseModal()"><i class="bi bi-plus-circle"></i></button>
     </div>
     <h2 class="text-sm lg:text-2xl font-bold">{{movie.tagline}}</h2>
     <h3 class="text-[10px] md:text-sm lg:text-base">{{movie.overview}}</h3>
@@ -48,6 +43,20 @@
     <div class="flex gap-3 text-[10px] md:text-sm lg:text-base">
       <h4 class="font-bold">Géneros: </h4>
       <p *ngFor="let genre of movie?.genres">{{genre.name}}</p>
+    </div>
+  </div>
+
+  <!-- modal -->
+  <div *ngIf="showModal" id="modal" class="absolute inset-0 w-full h-screen z-30 bg-black/60 flex justify-center text-[var(--color-base-azul)] animate-fade-in-down">
+    <div id="modalBody" class="bg-gray-300/90 size-100 rounded mt-5 p-4 overflow-y-auto flex flex-col gap-3">
+      <div class="flex justify-between items-center">
+        <h1 class="text-xl">{{movie.title}}</h1>
+        <button (click)="openCloseModal()" class="text-2xl hover:cursor-pointer"><i class="bi bi-x-lg"></i></button>
+      </div>
+      <h2>Agregar pelicula a:</h2>
+      <button *ngFor="let mood of userMoods" (click)="addMovieToMod(mood, movie)" class="py-2 bg-white/80 hover:bg-white/90 hover:cursor-pointer rounded">+ {{mood.name}}</button>
+      <p *ngIf="addError" class="text-center text-red-700 text-sm">{{addError}}</p>
+      <p *ngIf="addSuccess"  class="text-center text-green-700">{{addSuccess}}</p>
     </div>
   </div>
 

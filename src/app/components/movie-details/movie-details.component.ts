@@ -1,13 +1,15 @@
 import { Component, inject, OnInit } from '@angular/core';
 import { ActivatedRoute, RouterLink } from '@angular/router';
 import { MovieService } from '../../services/movie.service';
-import { Image, Movie, Video } from '../../types/movie.interface';
+import { Image, Movie, MovieDTO, Video } from '../../types/movie.interface';
 import { CommonModule } from '@angular/common';
 import { IconComponent } from "../icon/icon.component";
 import { NgxLiteYoutubeModule } from 'ngx-lite-video';
 import { CreditsResponse } from '../../types/tmdbResponse.interface';
 import { CreditsComponent } from "./credits/credits.component";
 import { Provider } from '../../types/prpovider.interface';
+import { Mood, UserMood } from '../../types/mood.interface';
+import { ApiService } from '../../services/api.service';
 
 @Component({
   selector: 'app-movie-details',
@@ -18,6 +20,7 @@ export class MovieDetailsComponent implements OnInit {
 
   private readonly movieService = inject(MovieService);
   private readonly route = inject(ActivatedRoute);
+  private readonly apiService = inject(ApiService);
 
   movie?: Movie;
   error: boolean = false;
@@ -32,6 +35,11 @@ export class MovieDetailsComponent implements OnInit {
   movieProdivers: Provider[] = [];
   linkProviderTMDB: string = '';
 
+  userMoods: UserMood[] = [];
+  showModal:boolean = false;
+  addSuccess:string = '';
+  addError:string = '';
+
   ngOnInit(): void {
     this.route.paramMap.subscribe(params => {
       const id = params.get('id')
@@ -39,6 +47,7 @@ export class MovieDetailsComponent implements OnInit {
         this.getMovie(id);
       }
     })
+    this.getUserMoods();
     setInterval(() => {
       this.nextImage();
     }, 4000);
@@ -127,5 +136,40 @@ export class MovieDetailsComponent implements OnInit {
 
   onImageLoad() {
     this.imageLoaded = true;
+  }
+
+  getUserMoods() {
+    this.apiService.getUserMoods().subscribe({
+      next: response => {
+        this.userMoods = response;
+      },
+      error: err => {
+        console.error("Error getting user Moods", err);
+      }
+    })
+  }
+
+  openCloseModal(){
+    this.showModal = !this.showModal;
+  }
+
+  addMovieToMod(mood:UserMood, movie:Movie){
+    const movieDTO:MovieDTO = {
+      id: movie.id,
+      title: movie.title,
+      poster_path: movie.poster_path
+    }
+    this.apiService.addMovieToMood(mood.id, movieDTO).subscribe({
+      next: () => {
+        this.addSuccess = `¡Pelicula guardada con éxito a ${mood.name}!`;
+        setTimeout(() => {
+          this.showModal = false;
+        }, 1500);
+      },
+      error: err => {
+        console.error("error adding to mood", err);
+        this.addError = "No se pudo agregar la pelicula a la lista. Intente mas tarde";
+      }
+    })
   }
 }
