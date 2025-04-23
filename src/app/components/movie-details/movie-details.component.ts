@@ -161,14 +161,14 @@ export class MovieDetailsComponent implements OnInit {
     }
     this.apiService.addMovieToMood(mood.id, movieDTO).subscribe({
       next: () => {
-        this.addSuccess = `¡Pelicula guardada con éxito a ${mood.name}!`;
+        this.addSuccess = `¡Pelicula guardada con éxito a ${mood.name}!`.toUpperCase();
         setTimeout(() => {
           this.showModal = false;
-        }, 1500);
+        }, 1700);
       },
       error: err => {
         console.error("error adding to mood", err);
-        this.addError = "No se pudo agregar la pelicula a la lista. Intente mas tarde";
+        this.addError = "No se pudo agregar la pelicula a la lista. Intente mas tarde".toUpperCase();
       }
     })
   }

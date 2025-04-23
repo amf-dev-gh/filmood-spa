@@ -55,8 +55,8 @@
       </div>
       <h2>Agregar pelicula a:</h2>
       <button *ngFor="let mood of userMoods" (click)="addMovieToMod(mood, movie)" class="py-2 bg-white/80 hover:bg-white/90 hover:cursor-pointer rounded">+ {{mood.name}}</button>
-      <p *ngIf="addError" class="text-center text-red-700 text-sm">{{addError}}</p>
-      <p *ngIf="addSuccess"  class="text-center text-green-700">{{addSuccess}}</p>
+      <p *ngIf="addError" class="text-center text-red-700"><i class="bi bi-x-circle"></i> {{addError}}</p>
+      <p *ngIf="addSuccess" class="text-center text-green-700"><i class="bi bi-check-circle"></i> {{addSuccess}}</p>
     </div>
   </div>
 
