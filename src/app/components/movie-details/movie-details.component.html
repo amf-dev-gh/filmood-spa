@@ -1,4 +1,4 @@
-<section *ngIf="movie && !error" id="movie-details" class="relative mt-15 w-full flex flex-col p-4 lg:py-2.5 lg:px-15">
+<section *ngIf="movie && !error" id="movie-details" class="relative mt-15 w-full flex flex-col p-0 lg:py-2.5 lg:px-15">
 
   <!-- muestra la imagen que viene con el detalle de pelicula solo si no tiene backdrops -->
   <img *ngIf="!imageList.length" [src]="getFullImageUrl('original', movie.backdrop_path)" alt="imagen {{movie.title}}"
@@ -14,22 +14,18 @@
   </div>
 
   <!-- botones de slider -->
-  <div *ngIf="imageList.length > 1"
-    class="absolute z-10 inset-0 h-[40vh] sm:h-[55vh] md:h-[70vh] lg:h-[85vh] flex justify-between items-center px-4 lg:px-15">
-    <button (click)="previousImage()"
-      class="h-7 md:h-11 lg:h-14 opacity-50 hover:opacity-90 hover:cursor-pointer hover:scale-110 transition-all">
-      <icon-svg name="previous" class="h-full" />
-    </button>
-    <button (click)="nextImage()"
-      class="h-7 md:h-11 lg:h-14 opacity-50 hover:opacity-90 hover:cursor-pointer hover:scale-110 transition-all">
-      <icon-svg name="next" class="h-full" />
-    </button>
-  </div>
+  <button (click)="slideImage(-1)" *ngIf="imageList.length > 1"
+    class="absolute h-7 md:h-11 lg:h-14 opacity-50 hover:opacity-90 hover:cursor-pointer hover:scale-110 transition-all left-6 lg:left-20 top-1/4 sm:top-2/5 z-10">
+    <icon-svg name="previous" class="h-full" />
+  </button>
+  <button (click)="slideImage(1)" *ngIf="imageList.length > 1"
+    class="absolute h-7 md:h-11 lg:h-14 opacity-50 hover:opacity-90 hover:cursor-pointer hover:scale-110 transition-all right-6 lg:right-20 top-1/4 sm:top-2/5 z-10">
+    <icon-svg name="next" class="h-full" />
+  </button>
+
 
   <!-- informacion de la pelicula -->
-  <div
-    class="sm:absolute bottom-0 left-0 bg-black/55 py-5 px-5 md:px-10 lg:px-35 mask-fade-xy animate-fade-in animate-delay-400 z-20">
-    <!-- TO DO botones para agregar o quitar de favoritos -->
+  <div class="sm:absolute bottom-0 left-0 bg-black/55 py-5 px-5 sm:px-10 md:px-15 lg:px-30 mask-fade-xy animate-fade-in animate-delay-400">
     <div class="flex gap-2 md:gap-4 items-center mb-1">
       <h1 class="text-xl md:text-2xl lg:text-5xl font-bold">{{movie.title}} </h1>
       <button class="text-sm sm:text-xl md:text-2xl hover:cursor-pointer hover:text-[var(--color-base-mostaza)] md:-mb-1" (click)="openCloseModal()"><i class="bi bi-plus-circle"></i></button>

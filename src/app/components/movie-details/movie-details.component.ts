@@ -49,7 +49,7 @@ export class MovieDetailsComponent implements OnInit {
     })
     this.getUserMoods();
     setInterval(() => {
-      this.nextImage();
+      this.slideImage(1);
     }, 4000);
   }
 
@@ -90,19 +90,14 @@ export class MovieDetailsComponent implements OnInit {
     });
   }
 
-  nextImage() {
-    if (this.showIndex < this.imageList.length - 1) {
-      this.showIndex += 1;
-    } else {
-      this.showIndex = 0;
-    }
-  }
-
-  previousImage() {
-    if (this.showIndex === 0) {
+  slideImage(slide:number){
+    const position = this.showIndex + slide;
+    if(position < 0){
       this.showIndex = this.imageList.length - 1;
-    } else {
-      this.showIndex -= 1;
+    } else if(position === this.imageList.length){
+      this.showIndex = 0;
+    }else{
+      this.showIndex = position;
     }
   }
 
