@@ -16,7 +16,7 @@ export class AuthService {
   private EXPIRATION: string = 'FM_EXPIRATION_TIME';
   private SESSION: string = 'FM_INIT_SESSION';
 
-  $isAuthenticated = signal<boolean>(this.getToken() !== '' && !this.isTokenExpired());
+  $isAuthenticated = signal<boolean>(this.isTokenValid());
 
   singUp(newUser: RegisterUser): Observable<RegisterResponse> {
     return this.http.post<RegisterResponse>(`${this.API_URL}/singup`, newUser);
@@ -28,7 +28,6 @@ export class AuthService {
 
   logout() {
     sessionStorage.clear();
-    this.$isAuthenticated.set(false);
   }
 
   setUserStorage(response: LoginResponse) {
@@ -37,7 +36,6 @@ export class AuthService {
     sessionStorage.setItem(this.EXPIRATION, response.expirationTime.toString());
     sessionStorage.setItem(this.ROLE, response.role);
     sessionStorage.setItem(this.SESSION, Date.now().toString());
-    this.$isAuthenticated.set(true);
   }
 
   getToken(): string {
@@ -45,18 +43,14 @@ export class AuthService {
     return token ? token : '';
   }
 
-  getUsername() {
-    return sessionStorage.getItem(this.USER) || '';
-  }
-
-  isTokenExpired() {
+  isTokenValid() {
     const session = sessionStorage.getItem(this.SESSION);
     const expirationTime = sessionStorage.getItem(this.EXPIRATION);
-    if (session && expirationTime) {
+    if (session && expirationTime && this.getToken() !== '') {
       const now = Date.now();
-      return (now - parseInt(session)) >= parseInt(expirationTime);
+      return (now - parseInt(session)) <= parseInt(expirationTime);
     }
-    return true;
+    return false;
   }
 
 }
