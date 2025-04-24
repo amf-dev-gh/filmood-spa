@@ -1,26 +1,20 @@
 <section id="movies" class="mt-15 relative w-full flex flex-col p-4 lg:py-2.5 lg:px-15">
 
   <!-- buscador -->
-  <h1 class="text-center text-3xl font-bold mt-5">Busca la pelicula por su nombre o Género</h1>
+  <h1 class="text-center text-3xl font-bold mt-5">Busca la película por su nombre o Género</h1>
   <div class="flex justify-center align-center flex-col sm:flex-row my-5 text-[var(--color-base-petroleo)] gap-3">
 
     <form (submit)="searchMovie()" class="relative">
-      <input 
-      type="text" 
-      class="bg-[var(--color-text)]/80 rounded-3xl w-full sm:w-110 h-10 py-2 ps-5 pe-8 text-[var(--color-base-petroleo)]"
-      placeholder="Ingresa el nombre de la película"
-      name="inputTitle" 
-      [(ngModel)]="inputTitle"
-      required>
+      <input type="text"
+        class="bg-[var(--color-text)]/80 rounded-3xl w-full sm:w-110 h-10 py-2 ps-5 pe-8 text-[var(--color-base-petroleo)]"
+        placeholder="Ingresa el nombre de la película" name="inputTitle" [(ngModel)]="inputTitle" required>
 
       <button type="submit" class="text-xl absolute right-2.5 top-1.5 hover:cursor-pointer">
         <i class="bi bi-search h-full w-auto"></i>
       </button>
     </form>
 
-    <select name="inputSelect" id="inputSelect"
-      [(ngModel)]="selectedGenre"
-      (ngModelChange)="findByGenre($event)"
+    <select name="inputSelect" id="inputSelect" [(ngModel)]="selectedGenre" (ngModelChange)="findByGenre($event)"
       class="bg-[var(--color-text)]/80 rounded-3xl w-full sm:w-60 h-10 py-2 px-4 text-[var(--color-base-petroleo)]">
       <option value="" disabled selected>- Género -</option>
       <option *ngFor="let genre of genres" [value]="genre.id">{{ genre.name }}</option>
@@ -28,7 +22,7 @@
 
   </div>
 
-  <!-- peliculas encontradas -->
+  <!-- películas encontradas -->
   <div *ngIf="!notFoundMovies && foundMovies.length" class="flex flex-col gap-4 mb-8">
     <div class="flex gap-2 items-center">
       <h1 class="text-2xl font-bold">Resultados para {{title}} >></h1>
@@ -46,7 +40,7 @@
     </div>
   </div>
 
-  <!-- peliculas no encontradas -->
+  <!-- películas no encontradas -->
   <div *ngIf="notFoundMovies" class="flex flex-col gap-4 mb-8">
     <h1 class="text-2xl font-bold">No se encontraron resultados para {{title}}</h1>
   </div>
