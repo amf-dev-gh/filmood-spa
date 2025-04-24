@@ -16,7 +16,7 @@ export class MovieService {
   // # Obtenga una lista de películas ordenadas por popularidad.
   // # https://api.themoviedb.org/3/movie/popular?language=es-ES&page=1
 
-  // # Obtenga detalles de una pelicula específica
+  // # Obtenga detalles de una película específica
   // # https://api.themoviedb.org/3/movie/movie_id?language=es-ES
 
   // # Obtenga una lista de películas que se estrenarán pronto.
@@ -28,22 +28,22 @@ export class MovieService {
   // # Obtenga los videos que pertenecen a una película.
   // # https://api.themoviedb.org/3/movie/movie_id/videos?language=es-ES
 
-  // # Buscar peliculas por titulo
-  // # https://api.themoviedb.org/3/search/movie?query=TITULO_PELICULA&language=es-ES
+  // # Buscar películas por titulo
+  // # https://api.themoviedb.org/3/search/movie?query=TITULO_PElícula&language=es-ES
 
-  // # Listado de generos de peliculas
+  // # Listado de generos de películas
   // # https://api.themoviedb.org/3/genre/movie/list?language=es-ES
 
-  // # Trending de peliculas de la semana
+  // # Trending de películas de la semana
   // # https://api.themoviedb.org/3/trending/movie/week?language=es-ES
 
-  // # Creditos de una pelicula,(Reparto....)
+  // # Creditos de una película,(Reparto....)
   // # https://api.themoviedb.org/3/movie/{movie_id}/credits?language=es-ES
 
-  // # Buscar peliculas por genero
+  // # Buscar películas por genero
   // # https://api.themoviedb.org/3/discover/movie?api_key=TU_API_KEY&with_genres=ID_DEL_GENERO&language=es-ES
 
-  // # Proveedores de una pelicula especifica
+  // # Proveedores de una película especifica
   // # https://api.themoviedb.org/3/movie/933260/watch/providers
 
   private readonly http = inject(HttpClient);
