@@ -28,9 +28,21 @@
 
       <div class="flex items-center justify-between">
         <div class="flex items-center gap-3">
-          <h2 class="text-2xl font-bold">{{selectedMood.name}}</h2>
-          <button class="text-2xl text-red-900/80 hover:text-red-900/100 hover:cursor-pointer" title="Eliminar Mood"
+          <h2 class="text-2xl font-bold py-2">{{selectedMood.name}}</h2>
+
+          <span *ngIf="!selectedMood.private">(Mood público)</span>
+
+          <span *ngIf="selectedMood.private">(Mood privado)</span>
+
+          <button class="text-2xl text-red-900/80 hover:text-red-900/100 hover:cursor-pointer hover:scale-105 transition-all" title="Eliminar Mood"
             (click)="deleteMood(selectedMood.id)"><i class="bi bi-trash"></i></button>
+
+          <button *ngIf="!selectedMood.private" class="text-2xl text-red-900/80 hover:text-red-900/100 hover:cursor-pointer hover:scale-105 transition-all" title="Hacer privado"
+            (click)="changePrivacity(selectedMood.id)"><i class="bi bi-lock"></i></button>
+
+          <button *ngIf="selectedMood.private" class="text-2xl text-green-900/80 hover:text-green-900/100 hover:cursor-pointer hover:scale-105 transition-all'8" title="Hacer público"
+            (click)="changePrivacity(selectedMood.id)"><i class="bi bi-unlock"></i></button>
+
         </div>
         <button (click)="closeMood()" class="text-2xl hover:cursor-pointer"><i class="bi bi-x-lg"></i></button>
       </div>

@@ -28,4 +28,7 @@ export class ApiService {
     return this.http.post<any>(`${this.API_URL}/addTo/${moodId}`, movieDto);
   }
 
+  updateMood(moodId: number): Observable<any> {
+    return this.http.post<any>(`${this.API_URL}/updatePrivacity/${moodId}`, {});
+  }
 }

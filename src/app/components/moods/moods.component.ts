@@ -82,4 +82,20 @@ export class MoodsComponent implements OnInit {
     }
   }
 
+  changePrivacity(moodId:number){
+    const updateConfirm = confirm(`Se cambiará la privacidad de su Mood ${this.selectedMood?.name}. ¿Confirma?`);
+    if(updateConfirm){
+      this.apiService.updateMood(moodId).subscribe({
+        next: response => {
+          alert('Mood actualizazdo');
+          this.getUserMoods();
+          this.selectedMood = response;
+        },
+        error: err => {
+          console.error('Update Error', err);
+        }
+      })
+    }
+  }
+
 }
