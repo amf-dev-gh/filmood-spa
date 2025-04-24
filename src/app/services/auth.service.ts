@@ -28,6 +28,7 @@ export class AuthService {
 
   logout() {
     sessionStorage.clear();
+    this.$isAuthenticated.set(false);
   }
 
   setUserStorage(response: LoginResponse) {
@@ -36,6 +37,7 @@ export class AuthService {
     sessionStorage.setItem(this.EXPIRATION, response.expirationTime.toString());
     sessionStorage.setItem(this.ROLE, response.role);
     sessionStorage.setItem(this.SESSION, Date.now().toString());
+    this.$isAuthenticated.set(true);
   }
 
   getToken(): string {

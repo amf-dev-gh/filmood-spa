@@ -5,10 +5,9 @@ import { AuthService } from "../services/auth.service";
 export const LoginGuard : CanActivateFn = (route, state) => {
   const authService = inject(AuthService);
   const router = inject(Router);
-  const token = authService.getToken();
-  const tokenExpired = authService.isTokenExpired();
+  const isAuthenticated = authService.$isAuthenticated();
 
-  if(!token || tokenExpired){
+  if(!isAuthenticated){
     authService.logout()
     router.navigate(['/login']);
     return false;
