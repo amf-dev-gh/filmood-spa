@@ -10,10 +10,10 @@ Filmood es una aplicación web desarrollada con **Angular** que permite a los us
 - [✅] Búsqueda de películas por nombre y por categoría.
 - [✅] Detalles de cada película: título, sinopsis, fecha de estreno, puntuación y más.
 - [✅] Interfaz moderna y responsive desarrollada con **Angular 19** y **Tailwind CSS 4**.
-- [-] Registro e inicio de sesión de usuarios.
-- [-] Guardar películas favoritas y crear listas personalizadas.
+- [✅] Registro e inicio de sesión de usuarios.
+- [✅] Guardar películas favoritas y crear listas personalizadas.
 - [-] Backend propio en Spring Boot + JWT para manejo de cuentas y almacenamiento de datos.
-- [-] Seguridad con autenticación y roles.
+- [✅] Seguridad con autenticación y roles.
 
 ## 🛠️ Tecnologías usadas
 
