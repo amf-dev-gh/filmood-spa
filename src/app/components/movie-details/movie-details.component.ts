@@ -8,8 +8,9 @@ import { NgxLiteYoutubeModule } from 'ngx-lite-video';
 import { CreditsResponse } from '../../types/tmdbResponse.interface';
 import { CreditsComponent } from "./credits/credits.component";
 import { Provider } from '../../types/prpovider.interface';
-import { Mood, UserMood } from '../../types/mood.interface';
+import { UserMood } from '../../types/mood.interface';
 import { ApiService } from '../../services/api.service';
+import { AuthService } from '../../services/auth.service';
 
 @Component({
   selector: 'app-movie-details',
@@ -21,6 +22,7 @@ export class MovieDetailsComponent implements OnInit {
   private readonly movieService = inject(MovieService);
   private readonly route = inject(ActivatedRoute);
   private readonly apiService = inject(ApiService);
+  private readonly authService = inject(AuthService);
 
   movie?: Movie;
   error: boolean = false;
@@ -30,15 +32,17 @@ export class MovieDetailsComponent implements OnInit {
   credits?: CreditsResponse;
 
   showIndex: number = 0;
-  imageLoaded:boolean = false;
+  imageLoaded: boolean = false;
 
   movieProdivers: Provider[] = [];
   linkProviderTMDB: string = '';
 
   userMoods: UserMood[] = [];
-  showModal:boolean = false;
-  addSuccess:string = '';
-  addError:string = '';
+  showModal: boolean = false;
+  addSuccess: string = '';
+  addError: string = '';
+
+  isAuthenticated: boolean = this.authService.$isAuthenticated();
 
   ngOnInit(): void {
     this.route.paramMap.subscribe(params => {
@@ -47,7 +51,7 @@ export class MovieDetailsComponent implements OnInit {
         this.getMovie(id);
       }
     })
-    this.getUserMoods();
+    if (this.isAuthenticated) this.getUserMoods();
     setInterval(() => {
       this.slideImage(1);
     }, 4000);
@@ -90,13 +94,13 @@ export class MovieDetailsComponent implements OnInit {
     });
   }
 
-  slideImage(slide:number){
+  slideImage(slide: number) {
     const position = this.showIndex + slide;
-    if(position < 0){
+    if (position < 0) {
       this.showIndex = this.imageList.length - 1;
-    } else if(position === this.imageList.length){
+    } else if (position === this.imageList.length) {
       this.showIndex = 0;
-    }else{
+    } else {
       this.showIndex = position;
     }
   }
@@ -144,26 +148,26 @@ export class MovieDetailsComponent implements OnInit {
     })
   }
 
-  openCloseModal(){
+  openCloseModal() {
     this.showModal = !this.showModal;
   }
 
-  addMovieToMod(mood:UserMood, movie:Movie){
-    const movieDTO:MovieDTO = {
+  addMovieToMod(mood: UserMood, movie: Movie) {
+    const movieDTO: MovieDTO = {
       id: movie.id,
       title: movie.title,
       poster_path: movie.poster_path
     }
     this.apiService.addMovieToMood(mood.id, movieDTO).subscribe({
       next: () => {
-        this.addSuccess = `¡Pelicula guardada con éxito a ${mood.name}!`.toUpperCase();
+        this.addSuccess = `¡Película guardada con éxito a ${mood.name}!`.toUpperCase();
         setTimeout(() => {
           this.showModal = false;
         }, 1700);
       },
       error: err => {
         console.error("error adding to mood", err);
-        this.addError = "No se pudo agregar la pelicula a la lista. Intente mas tarde".toUpperCase();
+        this.addError = "No se pudo agregar la película a la lista. Intente mas tarde".toUpperCase();
       }
     })
   }

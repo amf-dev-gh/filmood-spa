@@ -1,12 +1,13 @@
 <section *ngIf="movie && !error" id="movie-details" class="relative mt-15 w-full flex flex-col p-0 lg:py-2.5 lg:px-15">
 
-  <!-- muestra la imagen que viene con el detalle de pelicula solo si no tiene backdrops -->
+  <!-- muestra la imagen que viene con el detalle de película solo si no tiene backdrops -->
   <img *ngIf="!imageList.length" [src]="getFullImageUrl('original', movie.backdrop_path)" alt="imagen {{movie.title}}"
     class="max-h-[85vh] object-cover mask-fade-xy animate-fade-in" (load)="onImageLoad()" [class.hidden]="!imageLoaded">
 
   <!-- backdrops, hacer un slider si la lista de imagenes tiene datos -->
   <img *ngIf="imageList.length >= 1" [src]="getFullImageUrl('original', imageList[showIndex].file_path)"
-    alt="imagen {{movie.title}}" class="max-h-[85vh] object-cover mask-fade-xy animate-fade-in" (load)="onImageLoad()" [class.hidden]="!imageLoaded">
+    alt="imagen {{movie.title}}" class="max-h-[85vh] object-cover mask-fade-xy animate-fade-in" (load)="onImageLoad()"
+    [class.hidden]="!imageLoaded">
 
   <!-- Spinner -->
   <div *ngIf="!imageLoaded" class="flex items-center justify-center w-full h-[80vh]">
@@ -24,11 +25,14 @@
   </button>
 
 
-  <!-- informacion de la pelicula -->
-  <div class="sm:absolute bottom-0 left-0 bg-black/55 py-5 px-5 sm:px-10 md:px-15 lg:px-30 mask-fade-xy animate-fade-in animate-delay-400">
+  <!-- informacion de la película -->
+  <div
+    class="sm:absolute bottom-0 left-0 bg-black/55 py-5 px-5 sm:px-10 md:px-15 lg:px-30 mask-fade-xy animate-fade-in animate-delay-400">
     <div class="flex gap-2 md:gap-4 items-center mb-1">
       <h1 class="text-xl md:text-2xl lg:text-5xl font-bold">{{movie.title}} </h1>
-      <button class="text-sm sm:text-xl md:text-2xl hover:cursor-pointer hover:text-[var(--color-base-mostaza)] md:-mb-1" (click)="openCloseModal()"><i class="bi bi-plus-circle"></i></button>
+      <button
+        class="text-sm sm:text-xl md:text-2xl hover:cursor-pointer hover:text-[var(--color-base-mostaza)] md:-mb-1"
+        (click)="openCloseModal()"><i class="bi bi-plus-circle"></i></button>
     </div>
     <h2 class="text-sm lg:text-2xl font-bold">{{movie.tagline}}</h2>
     <h3 class="text-[10px] md:text-sm lg:text-base">{{movie.overview}}</h3>
@@ -43,22 +47,29 @@
   </div>
 
   <!-- modal -->
-  <div *ngIf="showModal" id="modal" class="absolute inset-0 w-full h-screen z-30 bg-black/60 flex justify-center text-[var(--color-base-azul)] animate-fade-in-down">
-    <div id="modalBody" class="bg-gray-300/90 size-100 rounded mt-5 p-4 overflow-y-auto flex flex-col gap-3">
+  <div *ngIf="showModal"
+    class="absolute inset-0 w-full h-screen z-30 bg-black/60 flex justify-center text-[var(--color-base-azul)] animate-fade-in-down px-3">
+    <div class="bg-gray-300/90 size-100 rounded mt-5 p-4 overflow-y-auto flex flex-col gap-3">
       <div class="flex justify-between items-center">
         <h1 class="text-xl">{{movie.title}}</h1>
         <button (click)="openCloseModal()" class="text-2xl hover:cursor-pointer"><i class="bi bi-x-lg"></i></button>
       </div>
-      <h2>Agregar pelicula a:</h2>
-      <button *ngFor="let mood of userMoods" (click)="addMovieToMod(mood, movie)" class="py-2 bg-white/80 hover:bg-white/90 hover:cursor-pointer rounded">+ {{mood.name}}</button>
-      <p *ngIf="addError" class="text-center text-red-700"><i class="bi bi-x-circle"></i> {{addError}}</p>
-      <p *ngIf="addSuccess" class="text-center text-green-700"><i class="bi bi-check-circle"></i> {{addSuccess}}</p>
+      <div *ngIf="isAuthenticated" class="flex flex-col gap-3">
+        <h2>Añadir película a:</h2>
+        <button *ngFor="let mood of userMoods" (click)="addMovieToMod(mood, movie)"
+          class="py-2 bg-white/80 hover:bg-white/90 hover:cursor-pointer rounded">+ {{mood.name}}</button>
+        <p *ngIf="addError" class="text-center text-red-700"><i class="bi bi-x-circle"></i> {{addError}}</p>
+        <p *ngIf="addSuccess" class="text-center text-green-700"><i class="bi bi-check-circle"></i> {{addSuccess}}</p>
+      </div>
+      <div *ngIf="!isAuthenticated" class="flex flex-col justify-center items-center gap-3 h-full">
+        <h2 class="text-center">Inicia sesión para poder agregar películas tus moods.</h2>
+        <a routerLink="/login" class="btn-primary">Ingresar</a>
+      </div>
     </div>
   </div>
 
   <!-- disponible en.... -->
-  <div *ngIf="movieProdivers" id="plataforms"
-    class="sm:absolute flex justify-center lg:px-15 gap-3 z-10 top-6 right-6">
+  <div *ngIf="movieProdivers" id="plataforms" class="sm:absolute flex justify-center lg:px-15 gap-3 z-10 top-6 right-6">
     <a *ngFor="let provider of movieProdivers" [href]="linkProviderTMDB" target="_blank"
       class="size-7 md:size-10 rounded overflow-hidden hover:scale-105 transition-all shadow-white/70 shadow-xs hover:shadow-amber-200">
       <img [src]="getFullImageUrl('w92', provider.logo_path)" alt="logo {{ provider.provider_name }}"
