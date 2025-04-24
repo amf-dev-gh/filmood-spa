@@ -10,11 +10,11 @@ export class AuthService {
 
   private readonly http = inject(HttpClient);
   private API_URL: string = 'http://localhost:8080/api/auth';
-  private USER: string = 'USER_NAME';
-  private ROLE: string = 'USER_ROLE';
-  private TOKEN: string = 'USER_TOKEN';
-  private EXPIRATION: string = 'EXPIRATION_TIME';
-  private SESSION: string = 'INIT_SESSION';
+  private USER: string = 'FM_USER_NAME';
+  private ROLE: string = 'FM_USER_ROLE';
+  private TOKEN: string = 'FM_USER_TOKEN';
+  private EXPIRATION: string = 'FM_EXPIRATION_TIME';
+  private SESSION: string = 'FM_INIT_SESSION';
 
   $isAuthenticated = signal<boolean>(this.getToken() !== '' && !this.isTokenExpired());
 
@@ -51,7 +51,7 @@ export class AuthService {
 
   isTokenExpired() {
     const session = sessionStorage.getItem(this.SESSION);
-    const expirationTime = sessionStorage.getItem(this.TOKEN);
+    const expirationTime = sessionStorage.getItem(this.EXPIRATION);
     if (session && expirationTime) {
       const now = Date.now();
       return (now - parseInt(session)) >= parseInt(expirationTime);
