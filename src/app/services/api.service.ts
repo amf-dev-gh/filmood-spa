@@ -31,4 +31,8 @@ export class ApiService {
   updateMood(moodId: number): Observable<any> {
     return this.http.post<any>(`${this.API_URL}/updatePrivacity/${moodId}`, {});
   }
+
+  deleteMovieFromMood(movieId:number, moodId:number): Observable<UserMood>{
+    return this.http.delete<UserMood>(`${this.API_URL}/deleteMovie/${movieId}/${moodId}`);
+  }
 }
