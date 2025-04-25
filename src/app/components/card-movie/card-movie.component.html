@@ -1,4 +1,4 @@
-<div *ngIf="movie" [routerLink]="'/movie/'+movie.id" class="relative w-full h-auto group hover:scale-105 transition-all rounded shadow-xs shadow-[#2A9D8F] hover:cursor-pointer" [title]="movie.title">
+<div *ngIf="movie" [routerLink]="'/movie/'+movie.id" class="relative w-full h-auto group hover:scale-105 transition-all rounded shadow-xs hover:cursor-pointer border border-transparent hover:border-gray-400" [title]="movie.title">
   <img [src]="getFullImageUrl('w342',movie.poster_path)" alt="imagen {{movie.title}}" class="aspect-[200/300] w-full h-auto rounded" (load)="onImageLoad()"
     [class.hidden]="!imageLoaded">
     <!-- Spinner -->
