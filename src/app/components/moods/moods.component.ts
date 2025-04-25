@@ -2,12 +2,13 @@ import { Component, inject, OnInit } from '@angular/core';
 import { ApiService } from '../../services/api.service';
 import { UserMood } from '../../types/mood.interface';
 import { CommonModule } from '@angular/common';
-import { CardMovieComponent } from "../card-movie/card-movie.component";
 import { FormsModule } from '@angular/forms';
+import { RouterLink } from '@angular/router';
+import { Movie } from '../../types/movie.interface';
 
 @Component({
   selector: 'app-moods',
-  imports: [CommonModule, CardMovieComponent, FormsModule],
+  imports: [CommonModule, FormsModule, RouterLink],
   templateUrl: './moods.component.html',
   styleUrl: './moods.component.css'
 })
@@ -82,9 +83,9 @@ export class MoodsComponent implements OnInit {
     }
   }
 
-  changePrivacity(moodId:number){
+  changePrivacity(moodId: number) {
     const updateConfirm = confirm(`Se cambiará la privacidad de su Mood ${this.selectedMood?.name}. ¿Confirma?`);
-    if(updateConfirm){
+    if (updateConfirm) {
       this.apiService.updateMood(moodId).subscribe({
         next: response => {
           alert('Mood actualizazdo');
@@ -96,6 +97,29 @@ export class MoodsComponent implements OnInit {
         }
       })
     }
+  }
+
+  deleteMovie(movie: Movie, moodId: number) {
+    const deleteConfirm = confirm(`Se eliminará la pelicula ${movie.title} de su Mood ${this.selectedMood?.name}. ¿Confirma?`);
+    if (deleteConfirm) {
+      this.apiService.deleteMovieFromMood(movie.id, moodId).subscribe({
+        next: response => {
+          alert('Película eliminada');
+          this.getUserMoods();
+          this.selectedMood = response;
+        },
+        error: err => {
+          console.error('Update Error', err);
+        }
+      })
+    }
+  }
+
+  getFullImageUrl(size: string, path: string): string {
+    if (path === null) {
+      return '/images/default_poster.webp';
+    };
+    return `https://image.tmdb.org/t/p/${size}${path}`;
   }
 
 }
