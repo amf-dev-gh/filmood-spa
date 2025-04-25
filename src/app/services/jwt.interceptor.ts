@@ -8,7 +8,7 @@ export const JwtInterceptor: HttpInterceptorFn = (req, next) => {
   const token = authService.getToken();
 
   const routes = [
-    'http://localhost:8080/api/filmood',
+    'http://localhost:8080/api/filmood/moods/',
   ];
 
   const requiereAuth = routes.some(url => req.url.startsWith(url));
