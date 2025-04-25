@@ -1,0 +1,21 @@
+<section id="movies" class="mt-15 relative w-full flex flex-col items-center p-4 lg:py-2.5 lg:px-15">
+
+  <h1 class="text-4xl font-bold mb-5">Moods creados por la comunidad</h1>
+
+  <div class="min-w-80 mx-auto text-[var(--color-base-azul)] text-center rounded">
+    <div class="divide-y">
+      @for (mood of comunityMoods; track $index) {
+        <div class="w-full px-4 py-2 bg-gray-100/90 hover:bg-gray-100 flex justify-between items-center">
+          <h3>{{mood.name}}</h3>
+          <button *ngIf="showindex !== $index" (click)="toggle($index)" class="hover:cursor-pointer"><i class="bi bi-chevron-down"></i></button>
+          <button *ngIf="showindex === $index" (click)="toggle($index)" class="hover:cursor-pointer"><i class="bi bi-chevron-up"></i></button>
+        </div>
+
+        <div *ngIf="showindex === $index" class="px-4 py-2 bg-white/70 animate-fade-in-down flex flex-col gap-2">
+          <a [routerLink]="'/movie/'+movie.id" *ngFor="let movie of mood.movies" class="hover:underline">{{movie.title}}</a>
+        </div>
+      }
+    </div>
+  </div>
+
+</section>
