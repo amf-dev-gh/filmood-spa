@@ -2,7 +2,7 @@
 
   <div
     class="[grid-template:sidebar] bg-gray-400/90 rounded p-4 text-[var(--color-base-azul)] flex flex-col gap-4  overflow-y-auto">
-    <h1 class="text-3xl font-bold">Mis Moods</h1>
+    <h1 class="text-2xl md:text-3xl font-bold">Mis Moods</h1>
     <div class="flex flex-col gap-2">
       <button *ngFor="let mood of userMoods" (click)="selectMood(mood)"
         class="py-2 hover:cursor-pointer rounded shadow" [ngClass]="mood === selectedMood ? 'bg-[var(--color-base-turquesa)] border-2 border-[#21867A] hover:bg-[#21867A]':'bg-white/80 hover:bg-white/90'">{{mood.name}}</button>
@@ -21,30 +21,33 @@
 
   <div class="[grid-template:content] bg-gray-400/90 rounded p-4 text-[var(--color-base-azul)] sm:overflow-y-auto">
     <!-- caso de que el mood no este seleccionado -->
-    <h2 *ngIf="!selectedMood" class="text-2xl font-bold">Ningun Mood seleccionado...</h2>
+    <h2 *ngIf="!selectedMood" class="text-1xl md:text-2xl font-bold">Ningun Mood seleccionado...</h2>
 
     <!-- detalle del mood seleccionado -->
     <div *ngIf="selectedMood" class="flex flex-col gap-2">
 
-      <div class="flex items-center justify-between">
-        <div class="flex items-center gap-3">
-          <h2 class="text-2xl font-bold py-2">{{selectedMood.name}}</h2>
-
-          <span *ngIf="!selectedMood.private">(Mood público)</span>
-
-          <span *ngIf="selectedMood.private">(Mood privado)</span>
-
-          <button class="text-2xl text-red-900/80 hover:text-red-900/100 hover:cursor-pointer hover:scale-105 transition-all" title="Eliminar Mood"
+      <div class="flex flex-col">
+  
+        <div class="flex justify-between items-center gap-2">
+          <button class="text-xl md:text-2xl text-red-900/80 hover:text-red-900/100 hover:cursor-pointer hover:scale-105 transition-all" title="Eliminar Mood"
             (click)="deleteMood(selectedMood.id)"><i class="bi bi-trash"></i></button>
-
-          <button *ngIf="!selectedMood.private" class="text-2xl text-red-900/80 hover:text-red-900/100 hover:cursor-pointer hover:scale-105 transition-all" title="Hacer privado"
+  
+          <button *ngIf="!selectedMood.private" class="text-xl md:text-2xl text-red-900/80 hover:text-red-900/100 hover:cursor-pointer hover:scale-105 transition-all me-auto" title="Hacer privado"
             (click)="changePrivacity(selectedMood.id)"><i class="bi bi-lock"></i></button>
-
-          <button *ngIf="selectedMood.private" class="text-2xl text-green-900/80 hover:text-green-900/100 hover:cursor-pointer hover:scale-105 transition-all'8" title="Hacer público"
+  
+          <button *ngIf="selectedMood.private" class="text-xl md:text-2xl text-green-900/80 hover:text-green-900/100 hover:cursor-pointer hover:scale-105 transition-all me-auto" title="Hacer público"
             (click)="changePrivacity(selectedMood.id)"><i class="bi bi-unlock"></i></button>
+  
+          <button (click)="closeMood()" class="text-xl md:text-2xl hover:cursor-pointer"><i class="bi bi-x-lg"></i></button>
 
         </div>
-        <button (click)="closeMood()" class="text-2xl hover:cursor-pointer"><i class="bi bi-x-lg"></i></button>
+ 
+        <h2 class="text-1xl md:text-2xl font-bold py-2 items-center">
+          {{selectedMood.name}} 
+          <span *ngIf="!selectedMood.private" class="text-xs">(público)</span>
+          <span *ngIf="selectedMood.private" class="text-sm">(privado)</span>
+        </h2>
+          
       </div>
 
       <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-7 gap-4">
