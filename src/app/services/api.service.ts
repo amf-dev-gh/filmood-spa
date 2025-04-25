@@ -35,4 +35,8 @@ export class ApiService {
   deleteMovieFromMood(movieId:number, moodId:number): Observable<UserMood>{
     return this.http.delete<UserMood>(`${this.API_URL}/deleteMovie/${movieId}/${moodId}`);
   }
+
+  getPulicMoods():Observable<any>{
+    return this.http.get<any>(`${this.API_URL}`);
+  }
 }
