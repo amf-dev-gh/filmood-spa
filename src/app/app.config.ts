@@ -4,12 +4,11 @@ import { provideRouter } from '@angular/router';
 import { routes } from './app.routes';
 import { provideHttpClient, withInterceptors } from '@angular/common/http';
 import { ApiKeyInterceptor } from './services/api-key.interceptor';
-import { JwtInterceptor } from './services/jwt.interceptor';
 
 export const appConfig: ApplicationConfig = {
   providers: [
     provideZoneChangeDetection({ eventCoalescing: true }), 
     provideRouter(routes), 
-    provideHttpClient(withInterceptors([ApiKeyInterceptor, JwtInterceptor]))
+    provideHttpClient(withInterceptors([ApiKeyInterceptor]))
   ]
 };

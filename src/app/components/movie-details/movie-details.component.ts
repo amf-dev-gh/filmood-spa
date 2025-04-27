@@ -10,7 +10,6 @@ import { CreditsComponent } from "./credits/credits.component";
 import { Provider } from '../../types/prpovider.interface';
 import { UserMood } from '../../types/mood.interface';
 import { ApiService } from '../../services/api.service';
-import { AuthService } from '../../services/auth.service';
 
 @Component({
   selector: 'app-movie-details',
@@ -22,7 +21,6 @@ export class MovieDetailsComponent implements OnInit {
   private readonly movieService = inject(MovieService);
   private readonly route = inject(ActivatedRoute);
   private readonly apiService = inject(ApiService);
-  private readonly authService = inject(AuthService);
 
   movie?: Movie;
   error: boolean = false;
@@ -42,8 +40,6 @@ export class MovieDetailsComponent implements OnInit {
   addSuccess: string = '';
   addError: string = '';
 
-  isAuthenticated: boolean = this.authService.$isAuthenticated();
-
   ngOnInit(): void {
     this.route.paramMap.subscribe(params => {
       const id = params.get('id')
@@ -51,7 +47,6 @@ export class MovieDetailsComponent implements OnInit {
         this.getMovie(id);
       }
     })
-    if (this.isAuthenticated) this.getUserMoods();
     setInterval(() => {
       this.slideImage(1);
     }, 4000);

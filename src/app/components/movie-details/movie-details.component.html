@@ -54,16 +54,12 @@
         <h1 class="text-xl">{{movie.title}}</h1>
         <button (click)="openCloseModal()" class="text-2xl hover:cursor-pointer"><i class="bi bi-x-lg"></i></button>
       </div>
-      <div *ngIf="isAuthenticated" class="flex flex-col gap-3">
+      <div class="flex flex-col gap-3">
         <h2>Añadir película a:</h2>
         <button *ngFor="let mood of userMoods" (click)="addMovieToMod(mood, movie)"
           class="py-2 bg-white/80 hover:bg-white/90 hover:cursor-pointer rounded">+ {{mood.name}}</button>
         <p *ngIf="addError" class="text-center text-red-700"><i class="bi bi-x-circle"></i> {{addError}}</p>
         <p *ngIf="addSuccess" class="text-center text-green-700"><i class="bi bi-check-circle"></i> {{addSuccess}}</p>
-      </div>
-      <div *ngIf="!isAuthenticated" class="flex flex-col justify-center items-center gap-3 h-full">
-        <h2 class="text-center">Inicia sesión para poder agregar películas tus moods.</h2>
-        <a routerLink="/login" class="btn-primary">Ingresar</a>
       </div>
     </div>
   </div>
