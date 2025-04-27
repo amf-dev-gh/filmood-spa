@@ -1,4 +1,4 @@
-import { Genre, Movie } from "./movie.interface";
+import { Genre, Movie, MovieDTO } from "./movie.interface";
 
 export interface Mood {
   src: string,
@@ -8,7 +8,7 @@ export interface Mood {
 
 export interface UserMood {
   id: number,
-  movies: Movie[],
+  movies: MovieDTO[],
   name: string,
   private: boolean
 }
