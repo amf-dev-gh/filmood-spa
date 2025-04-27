@@ -45,4 +45,6 @@ export const ENVIROMENT = {
 ## Créditos
 - API proporcionada por TMDb
 
+- Branch DEMO
+
 - Desarrollado con ❤️ (y sin saber de diseño) por **Andres Mariano Fernández**
