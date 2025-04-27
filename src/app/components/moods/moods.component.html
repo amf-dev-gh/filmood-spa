@@ -29,14 +29,10 @@
       <div class="flex flex-col">
   
         <div class="flex justify-between items-center gap-2">
+          
           <button class="text-xl md:text-2xl text-red-900/80 hover:text-red-900/100 hover:cursor-pointer hover:scale-105 transition-all" title="Eliminar Mood"
-            (click)="deleteMood(selectedMood.id)"><i class="bi bi-trash"></i></button>
-  
-          <button *ngIf="!selectedMood.private" class="text-xl md:text-2xl text-red-900/80 hover:text-red-900/100 hover:cursor-pointer hover:scale-105 transition-all me-auto" title="Hacer privado"
-            (click)="changePrivacity(selectedMood.id)"><i class="bi bi-lock"></i></button>
-  
-          <button *ngIf="selectedMood.private" class="text-xl md:text-2xl text-green-900/80 hover:text-green-900/100 hover:cursor-pointer hover:scale-105 transition-all me-auto" title="Hacer público"
-            (click)="changePrivacity(selectedMood.id)"><i class="bi bi-unlock"></i></button>
+            (click)="deleteMood(selectedMood.id)"><i class="bi bi-trash"></i>
+          </button>
   
           <button (click)="closeMood()" class="text-xl md:text-2xl hover:cursor-pointer"><i class="bi bi-x-lg"></i></button>
 

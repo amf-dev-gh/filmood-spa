@@ -9,7 +9,7 @@ import { CreditsResponse } from '../../types/tmdbResponse.interface';
 import { CreditsComponent } from "./credits/credits.component";
 import { Provider } from '../../types/prpovider.interface';
 import { UserMood } from '../../types/mood.interface';
-import { ApiService } from '../../services/api.service';
+import { StorageService } from '../../services/storage.service';
 
 @Component({
   selector: 'app-movie-details',
@@ -20,7 +20,7 @@ export class MovieDetailsComponent implements OnInit {
 
   private readonly movieService = inject(MovieService);
   private readonly route = inject(ActivatedRoute);
-  private readonly apiService = inject(ApiService);
+  private readonly storageService = inject(StorageService);
 
   movie?: Movie;
   error: boolean = false;
@@ -38,9 +38,9 @@ export class MovieDetailsComponent implements OnInit {
   userMoods: UserMood[] = [];
   showModal: boolean = false;
   addSuccess: string = '';
-  addError: string = '';
 
   ngOnInit(): void {
+    this.userMoods = this.storageService.getUserMoods();
     this.route.paramMap.subscribe(params => {
       const id = params.get('id')
       if (id) {
@@ -132,17 +132,6 @@ export class MovieDetailsComponent implements OnInit {
     this.imageLoaded = true;
   }
 
-  getUserMoods() {
-    this.apiService.getUserMoods().subscribe({
-      next: response => {
-        this.userMoods = response;
-      },
-      error: err => {
-        console.error("Error getting user Moods", err);
-      }
-    })
-  }
-
   openCloseModal() {
     this.showModal = !this.showModal;
   }
@@ -153,17 +142,11 @@ export class MovieDetailsComponent implements OnInit {
       title: movie.title,
       poster_path: movie.poster_path
     }
-    this.apiService.addMovieToMood(mood.id, movieDTO).subscribe({
-      next: () => {
-        this.addSuccess = `¡Película guardada con éxito a ${mood.name}!`.toUpperCase();
-        setTimeout(() => {
-          this.showModal = false;
-        }, 1700);
-      },
-      error: err => {
-        console.error("error adding to mood", err);
-        this.addError = "No se pudo agregar la película a la lista. Intente mas tarde".toUpperCase();
-      }
-    })
+    this.storageService.addMovieToMood(mood.id, movieDTO);
+    this.addSuccess = `¡Película guardada con éxito a ${mood.name}!`.toUpperCase();
+    setTimeout(() => {
+      this.addSuccess = '';
+      this.showModal = false;
+    }, 1500);
   }
 }
