@@ -14,7 +14,7 @@
     </div>
   </div>
 
-  <div class="flex gap-6 justify-center items-start mt-2 flex-wrap">
+  <div class="flex flex-col gap-6 justify-center items-center sm:flex-row sm:items-start mt-2 flex-wrap">
     <div *ngIf="direction.length" class="flex flex-col gap-2 justify-center items-center">
       <h3 class="md:text-xl lg:text-2xl font-bold underline-offset-2 underline">Dirección</h3>
       <p *ngFor="let director of direction"  >{{director.name}}</p>
