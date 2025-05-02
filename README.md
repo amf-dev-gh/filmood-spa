@@ -12,8 +12,9 @@ Filmood es una aplicación web desarrollada con **Angular** que permite a los us
 - [✅] Interfaz moderna y responsive desarrollada con **Angular 19** y **Tailwind CSS 4**.
 - [✅] Registro e inicio de sesión de usuarios.
 - [✅] Guardar películas favoritas y crear listas personalizadas.
-- [-] Backend propio en Spring Boot + JWT para manejo de cuentas y almacenamiento de datos.
+- [✅] Backend propio en Spring Boot + JWT para manejo de cuentas y almacenamiento de datos.
 - [✅] Seguridad con autenticación y roles.
+- [Repositorio FilMood - Backend (Spring Boot)](https://github.com/amf-dev-gh/filmood-back)
 
 ## 🛠️ Tecnologías usadas
 
@@ -37,7 +38,7 @@ Accede a la app en: http://localhost:4200
 
 Para que la app funcione deberan obtener su API key desde la web de TMDB (Se crea una cuenta gratuita)
 
-Luego crear un archivo en la base del proyecto y llamado "enviroment.ts" con su token.
+Luego crear un archivo en la base del proyecto y llamado "env.ts" con su token.
 
 ```
 export const ENVIROMENT = {
