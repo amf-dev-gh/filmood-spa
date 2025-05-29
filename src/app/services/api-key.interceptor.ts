@@ -1,5 +1,5 @@
 import { HttpInterceptorFn } from "@angular/common/http";
-import { environment } from "../../environments/environment";
+import { environment } from "../../environments/environment.prod";
 
 export const ApiKeyInterceptor: HttpInterceptorFn = (req, next) => {
   const api_key = environment.tmdbApiKey;
