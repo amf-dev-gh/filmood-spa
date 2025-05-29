@@ -1,10 +1,8 @@
 import { HttpInterceptorFn } from "@angular/common/http";
-import { ENVIROMENT } from "../../../env";
+import { environment } from "../../enviroments/enviroment";
 
 export const ApiKeyInterceptor: HttpInterceptorFn = (req, next) => {
-  // const api_key = ENVIROMENT.TMDB_API_KEY;
-  // Prueba para despliegue en vercel
-  const api_key = process.env['NG_APP_TMDB_API_KEY'];
+  const api_key = environment.tmdbApiKey;
 
   const routes = [
     'https://api.themoviedb.org/3',
