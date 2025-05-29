@@ -3,6 +3,7 @@ import { ENVIROMENT } from "../../../env";
 
 export const ApiKeyInterceptor: HttpInterceptorFn = (req, next) => {
   // const api_key = ENVIROMENT.TMDB_API_KEY;
+  // Prueba para despliegue en vercel
   const api_key = process.env['NG_APP_TMDB_API_KEY'];
 
   const routes = [
